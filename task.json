@@ -1,0 +1,59 @@
+{
+  "id": "a615cd40-5e41-11e5-bee7-bd6eddb93242",
+  "name": "SauceLabs",
+  "friendlyName": "SauceLabs OnDemand Configuration",
+  "description": "SauceLabs Configuration for Web and Device Application Testing",
+  "author": "Gopinath",
+  "helpMarkDown": "Configures SauceLabs OnDemand Testing",
+  "category": "Test",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [ ],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "SauceLabs $(message)",
+  "inputs": [
+    {
+      "name": "connectedServiceName",
+      "type": "connectedService:Generic",
+      "label": "SauceLabsConnection",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "SauceLabs Account Details"
+    },
+    {
+      "name": "browsers",
+      "type": "string",
+      "label": "Browsers",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "List of Browsers"
+    },
+    {
+      "name": "sauceConnect",
+      "type": "boolean",
+      "label": "Sauce Connect",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Sauce Connect"
+    }
+
+ ],
+  "execution": {
+    "Node": {
+      "target": "sample.js",
+      "argumentFormat": ""
+    },
+    "PowerShell": {
+      "target": "$(currentDirectory)\\sample.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

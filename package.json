@@ -1,0 +1,16 @@
+{
+  "name": "vso-sauce-ondemand-plugin",
+  "version": "0.1.0",
+  "description": "SauceLabs integeration with Visual Studio Online",
+  "main": "task.json",
+  "scripts": {
+    "upload": "tfx build tasks upload  --taskpath .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gavinmogan.visualstudio.com/DefaultCollection/_git/sauce-ondemand-plugin"
+  },
+  "author": "Gavin Mogan <gavin@saucelabs.com>",
+  "license": "MIT"
+}
