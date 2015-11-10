@@ -1,8 +1,7 @@
 {
   "name": "vso-sauce-ondemand-plugin",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "SauceLabs integeration with Visual Studio Online",
-  "main": "task.json",
   "scripts": {
     "upload": "tfx build tasks upload  --taskpath .",
     "force_upload": "tfx build tasks upload  --taskpath . --overwrite",
@@ -17,12 +16,9 @@
     "Gavin Mogan <gavin@saucelabs.com>"
   ],
   "license": "MIT",
-  "dependencies": {
-    "minimatch": "^3.0.0",
-    "vso-node-api": "^0.4.2",
-    "vso-task-lib": "^0.4.5"
-  },
+  "dependencies": {},
   "devDependencies": {
-    "eslint": "^1.8.0"
+    "eslint": "^1.9.0",
+    "tfx-cli": "^0.1.11"
   }
 }

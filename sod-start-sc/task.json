@@ -1,7 +1,7 @@
 {
   "id": "8045db00-8367-11e5-977b-914493586e24",
-  "name": "SauceLabsSauceConnect",
-  "friendlyName": "Sauce - Start Sauce Connect",
+  "name": "SODStartSC",
+  "friendlyName": "Sauce Labs - Start Sauce Connect",
   "description": "Start up sauceconnect tunnel",
   "author": "Sauce Labs",
   "helpMarkDown": "Replace with markdown to show in help",
