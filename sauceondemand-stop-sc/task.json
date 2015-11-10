@@ -1,0 +1,33 @@
+{
+  "id": "dcff34e0-8759-11e5-b9e3-af173297909f",
+  "name": "SauceLabsStopSauceConnect",
+  "friendlyName": "Sauce - Stop Sauce Connect",
+  "description": "Stop up sauceconnect tunnel",
+  "author": "Sauce Labs",
+  "helpMarkDown": "Replace with markdown to show in help",
+  "category": "Utility",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "0",
+    "Minor": "1",
+    "Patch": "2"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "sauceondemandstopsc $(message)",
+  "inputs": [],
+  "execution": {
+    "Node": {
+      "target": "sample.js",
+      "argumentFormat": ""
+    },
+    "PowerShell": {
+      "target": "$(currentDirectory)\\sample.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}

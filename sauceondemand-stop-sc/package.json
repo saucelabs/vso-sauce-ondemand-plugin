@@ -1,0 +1,24 @@
+{
+  "name": "sod-stop-sc",
+  "version": "0.1.0",
+  "description": "SauceLabs integeration with Visual Studio Online",
+  "main": "task.json",
+  "scripts": {
+    "upload": "tfx build tasks upload  --taskpath .",
+    "force_upload": "tfx build tasks upload  --taskpath . --overwrite",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gavinmogan.visualstudio.com/DefaultCollection/_git/sauce-ondemand-plugin"
+  },
+  "author": "Sauce Labs <support@saucelabs.com>",
+  "contributors": [
+    "Gavin Mogan <gavin@saucelabs.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^1.8.0"
+  }
+}
