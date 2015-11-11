@@ -2,44 +2,44 @@
     "manifestVersion": 1,
     "id": "saucelabs-tasks",
     "name": "Sauce Labs integration Tools",
-    "version": "0.0.1",
+    "version": "0.1.3",
     "publisher": "saucelabs",
     "description": "Tools for building with Sauce labs. Includes three build tasks.",
     "categories": [
         "Build and release"
     ],
-    "icons": {
-        "default": "saucelabs-icon.png"
+    "content": {
+      "details": {
+        "path": "overview.md"
+      }
     },
-    "files": [
-        {
-            "path": "sauceondemand"
-        },
-        {
-            "path": "sauceondemand-start-sc"
-        },
-        {
-            "path": "sauceondemand-stop-sc"
-        }
+    "screenshots": [
+      {
+        "path": "images/saucelabs-icon.png"
+      }
     ],
+    "icons": {
+      "default": "images/saucelabs-icon.png"
+    },
+    "files": [ { "path": "images" } ],
     "contributions": [
         {
-            "id": "sauceondemand",
+            "id": "sod-main",
             "type": "ms.vss-distributed-task.task",
             "targets": [ "ms.vss-distributed-task.tasks" ],
-            "properties": { "name": "Task1" }
+            "properties": { "name": "sod-main" }
         },
         {
-            "id": "sauceondemand-start-sc",
+            "id": "sod-start-sc",
             "type": "ms.vss-distributed-task.task",
             "targets": [ "ms.vss-distributed-task.tasks" ],
-            "properties": { "name": "Task1" }
+            "properties": { "name": "sod-start-sc" }
         },
         {
-            "id": "sauceondemand-stop-sc",
+            "id": "sod-stop-sc",
             "type": "ms.vss-distributed-task.task",
             "targets": [ "ms.vss-distributed-task.tasks" ],
-            "properties": { "name": "Task2" }
+            "properties": { "name": "sod-stop-sc" }
         }
     ]
 }

@@ -1,7 +1,7 @@
 {
   "id": "dcff34e0-8759-11e5-b9e3-af173297909f",
   "name": "SODStopSC",
-  "friendlyName": "Sauce Labs - Stop Sauce Connect",
+  "friendlyName": "Sauce Labs (BETA) - Stop Sauce Connect",
   "description": "Stop up sauceconnect tunnel",
   "author": "Sauce Labs",
   "helpMarkDown": "Replace with markdown to show in help",
@@ -17,7 +17,7 @@
     "Patch": "3"
   },
   "minimumAgentVersion": "1.83.0",
-  "instanceNameFormat": "sauceondemandstopsc $(message)",
+  "instanceNameFormat": "Stop Sauce Connect $(message)",
   "inputs": [],
   "execution": {
     "Node": {

@@ -1,7 +1,7 @@
 {
   "id": "a615cd40-5e41-11e5-bee7-bd6eddb93242",
   "name": "SODMain",
-  "friendlyName": "Sauce Labs - Manage Credentials",
+  "friendlyName": "Sauce Labs (BETA) - Manage Credentials",
   "description": "SauceLabs Configuration for Web and Device Application Testing",
   "author": "Sauce Labs",
   "helpMarkDown": "Configures SauceLabs OnDemand Testing",
@@ -17,7 +17,7 @@
     "Patch": "3"
   },
   "minimumAgentVersion": "1.83.0",
-  "instanceNameFormat": "SauceLabs $(message)",
+  "instanceNameFormat": "Manage Sauce Credentials $(message)",
   "inputs": [
     {
       "name": "connectedServiceName",
