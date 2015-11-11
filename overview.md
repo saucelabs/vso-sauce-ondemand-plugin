@@ -12,7 +12,7 @@ To get started visit the Build tab on your VSO Dashboard.
 
 Next add a __Build Definition__. Select the relevant template for your project. In this example, we'll select a Visual Studio template.
 
-![create build definition](images/create_build_definition.png)
+![create build definition](images/create-build-definition.png)
 
 Configure your source code settings and select "Hosted" for the __Default agent queue__. Click "Create" when finished.
 
@@ -25,11 +25,11 @@ Now click __Add build step__ to get a list of tasks you can add. Search under "U
 
 The "Manage Credentials" task is what allows you authenticate with your Sauce Labs account via VSO. Click __Manage__ next to the SauceLabsConnection dropdown to create a new service endpoint which will contain your Sauce Labs username and access key. 
 
-![hosted](images/manage_credentials.png)
+![hosted](images/manage-credentials.png)
 
 Create a new "Generic" service endpoint and enter your Sauce username and API key. Note you will also need to give the connection a name - something like "firstname_lastname" will work. You will also need to input "https://www.saucelabs.com" as the Server URL. 
 
-![hosted](images/add_generic_connection.png)
+![hosted](images/add-generic-connection.png)
 
 Return to the Manage Credentials task and select the SauceLabsConnection that you just created. Ensure that the task is "Enabled" under __Control Options__.
 

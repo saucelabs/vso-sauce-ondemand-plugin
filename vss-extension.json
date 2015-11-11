@@ -22,7 +22,7 @@
       "default": "images/saucelabs-icon.png"
     },
     "files": [
-      { "path": "images" },
+      { "path": "images", "addressable": true },
       { "path": "sod-main" },
       { "path": "sod-start-sc" },
       { "path": "sod-stop-sc" }
