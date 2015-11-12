@@ -1,4 +1,6 @@
-## Sauce Labs Plugin for VSO Overview
+## Sauce Labs Plugin for Visual Sudio Online (Beta) Overview
+
+The Sauce Labs Plugin for Visual Studio Online enables Continuous Delivery by speeding up the testing cycle while increasing the quality of applications. 
 
 Sauce Labs is a platform for running your Selenium and Appium scripts in the cloud. Sauce Labs gives users the ability to run on over 600 browser/platform combinations from IE6 on Windows XP to Safari 9 on OSX El Capitan to Chrome the Samsung Galaxy S5. Cloud execution means massive parallelization so you can finish your automated tests in minutes rather than hours. 
 
@@ -18,14 +20,14 @@ Configure your source code settings and select "Hosted" for the __Default agent 
 
 ![hosted](images/hosted.png)
 
-Now click __Add build step__ to get a list of tasks you can add. Search under "Utility" to find three Sauce Labs related tasks that you can add. You will want to install all three but the order is important. First, add the Sauce Labs "Manage Credentials", then "Start Sauce Connect", and finally "Stop Sauce Connect".
+Now click __Add build step__ to get a list of tasks you can add. Search under "Test" to find two Sauce Labs related tasks that you can add. You will want to install both but the order is important. First, add the Sauce Labs "Manage Credentials" and then add "Stop Sauce Connect".
 
 
 ### Manage Credentials
 
-The "Manage Credentials" task is what allows you authenticate with your Sauce Labs account via VSO. Click __Manage__ next to the SauceLabsConnection dropdown to create a new service endpoint which will contain your Sauce Labs username and access key. 
+The "Manage Credentials" task is what allows you authenticate with your Sauce Labs account via VSO and start Sauce Connect. Click __Manage__ next to the SauceLabsConnection dropdown to create a new service endpoint which will contain your Sauce Labs username and access key. 
 
-![hosted](images/manage-credentials.png)
+![manage-credentials](images/manage-credentials.png)
 
 Create a new "Generic" service endpoint and enter your Sauce username and API key. Note you will also need to give the connection a name - something like "firstname_lastname" will work. You will also need to input "https://www.saucelabs.com" as the Server URL. 
 
@@ -41,9 +43,7 @@ You should use Sauce Connect whenever you’re testing an app behind a firewall.
 
 Adding this task will automatically launch a Sauce Connect tunnel for you whenever a build starts and authetnicate with the credentials you have input above. 
 
-# Gavin does the user need to have anything installed anywhere in particular? ^^^^^
-
-Ensure that the Start Sauce Connect task is "Enabled". You can also specify whether this task should __Always run__ and/or __Continue on error__.
+Ensure that the __Sauce Connect__ checkbox is enabled. You can also specify whether this task should __Always run__ and/or __Continue on error__.
 
 ### Stop Sauce Connect
 
