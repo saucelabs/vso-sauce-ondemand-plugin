@@ -27,7 +27,7 @@ Now click __Add build step__ to get a list of tasks you can add. Search under "T
 
 The "Manage Credentials" task is what allows you authenticate with your Sauce Labs account via VSO and start Sauce Connect. Click __Manage__ next to the SauceLabsConnection dropdown to create a new service endpoint which will contain your Sauce Labs username and access key. 
 
-![manage-credentials](images/manage-credentials.png)
+![manage-credentials](images/manage-credentials2.png)
 
 Create a new "Generic" service endpoint and enter your Sauce username and API key. Note you will also need to give the connection a name - something like "firstname_lastname" will work. You will also need to input "https://www.saucelabs.com" as the Server URL. 
 
