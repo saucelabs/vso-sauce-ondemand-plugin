@@ -21,7 +21,7 @@ Compatible with tests written in any language and framework. Use any test runner
 ### Pinpoint issues easily
 Flip through screenshots taken after each page-altering command to diagnose errors and verify layout. Or, watch a video recording of the whole test from start to finish.
 
-![hosted](images/test_details.png)
+![hosted](images/test-details.png)
 
 ### Test securely in the cloud
 All tests are run in our secure data center on brand new VMs that are destroyed after each run, assuring customer data is never exposed to future sessions. Control proxy and access policies while testing staged applications behind a firewall with [Sauce Connect](https://docs.saucelabs.com/reference/sauce-connect/), our secure tunneling technology. 
