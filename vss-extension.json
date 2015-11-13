@@ -1,10 +1,10 @@
 {
     "manifestVersion": 1,
     "id": "saucelabs-tasks",
-    "name": "Sauce Labs Plugin for VSO",
+    "name": "Sauce for Visual Studio Online",
     "version": "0.1.3",
     "publisher": "saucelabs",
-    "description": "Tools for building with Sauce labs. Includes two build tasks.",
+    "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality. Get access to over 650 browser/OS combinations for web and mobile apps including real devices.",
     "categories": [ "Test" ],
     "branding": {
       "color": "#00AFAA",
@@ -17,15 +17,15 @@
     },
     "links": {
       "home": { "uri": "https://saucelabs.com" },
-      "gettingstarted": { "uri": "https://saucelabs.com/signup" },
+      "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
       "learn": { "uri": "https://docs.saucelabs.com/" },
       "issues": { "uri": "https://support.saucelabs.com/" },
       "support": { "uri": "https://support.saucelabs.com" },
       "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
     },
     "screenshots": [
-      { "path": "images/screenshot1.png" },
-      { "path": "images/screenshot2.png" }
+      { "path": "images/screenshot2.png" },
+      { "path": "images/screenshot1.png" }
     ],
     "icons": {
       "default": "images/saucelabs-icon.png"
