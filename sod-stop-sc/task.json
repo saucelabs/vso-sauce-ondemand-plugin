@@ -1,7 +1,7 @@
 {
   "id": "dcff34e0-8759-11e5-b9e3-af173297909f",
   "name": "SODStopSC",
-  "friendlyName": "Sauce Labs (BETA) - Stop Sauce Connect",
+  "friendlyName": "Sauce Labs Stop Sauce Connect (Preview)",
   "description": "Stop up sauceconnect tunnel",
   "author": "Sauce Labs",
   "helpMarkDown": "Replace with markdown to show in help",

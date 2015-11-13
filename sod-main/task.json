@@ -1,10 +1,10 @@
 {
   "id": "a615cd40-5e41-11e5-bee7-bd6eddb93242",
   "name": "SODMain",
-  "friendlyName": "Sauce Labs (BETA) - Manage Credentials",
+  "friendlyName": "Sauce Labs Configuration (Preview)",
   "description": "SauceLabs Configuration for Web and Device Application Testing",
   "author": "Sauce Labs",
-  "helpMarkDown": "Configures SauceLabs OnDemand Testing",
+  "helpMarkDown": "Markdown help goes here ",
   "category": "Utility",
   "visibility": [
     "Build",
