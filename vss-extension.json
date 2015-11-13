@@ -24,7 +24,8 @@
       "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
     },
     "screenshots": [
-      { "path": "images/screenshot1.png" }
+      { "path": "images/screenshot1.png" },
+      { "path": "images/screenshot2.png" }
     ],
     "icons": {
       "default": "images/saucelabs-icon.png"
