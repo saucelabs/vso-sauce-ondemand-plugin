@@ -4,8 +4,8 @@
   "friendlyName": "Sauce Labs Configuration (Preview)",
   "description": "SauceLabs Configuration for Web and Device Application Testing",
   "author": "Sauce Labs",
-  "helpMarkDown": "Markdown help goes here ",
-  "category": "Utility",
+  "helpMarkDown": "",
+  "category": "Test",
   "visibility": [
     "Build",
     "Release"
