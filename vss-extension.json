@@ -21,6 +21,7 @@
       "learn": { "uri": "https://docs.saucelabs.com/" },
       "issues": { "uri": "https://support.saucelabs.com/" },
       "support": { "uri": "https://support.saucelabs.com" },
+      "license": { "uri": "https://saucelabs.com/tos/" },
       "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
     },
     "screenshots": [
