@@ -1,53 +1,88 @@
 {
-    "manifestVersion": 1,
-    "id": "saucelabs-tasks",
-    "name": "Sauce for Visual Studio Online",
-    "version": "0.1.3",
-    "publisher": "saucelabs",
-    "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
-    "categories": [ "Test" ],
-    "branding": {
-      "color": "#00AFAA",
-      "theme": "dark"
+  "manifestVersion": 1,
+  "id": "saucelabs-tasks",
+  "name": "Sauce for Visual Studio Online",
+  "version": "0.1.3",
+  "publisher": "saucelabs",
+  "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
+  "categories": [ "Test" ],
+  "branding": {
+    "color": "#00AFAA",
+    "theme": "dark"
+  },
+  "content": {
+    "details": {
+      "path": "overview.md"
+    }
+  },
+  "links": {
+    "home": { "uri": "https://saucelabs.com" },
+    "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
+    "learn": { "uri": "https://docs.saucelabs.com/" },
+    "issues": { "uri": "https://support.saucelabs.com/" },
+    "support": { "uri": "https://support.saucelabs.com" },
+    "license": { "uri": "https://saucelabs.com/tos/" },
+    "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
+  },
+  "screenshots": [
+    { "path": "images/screenshot2.png" },
+    { "path": "images/screenshot1.png" }
+  ],
+  "icons": {
+    "default": "images/saucelabs-icon.png"
+  },
+  "files": [
+    { "path": "images", "addressable": true },
+    { "path": "sod-main" },
+    { "path": "sod-stop-sc" }
+  ],
+  "contributions": [
+    {
+      "id": "sod-main",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [ "ms.vss-distributed-task.tasks" ],
+      "properties": { "name": "sod-main" }
     },
-    "content": {
-      "details": {
-        "path": "overview.md"
+    {
+      "id": "sod-stop-sc",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [ "ms.vss-distributed-task.tasks" ],
+      "properties": { "name": "sod-stop-sc" }
+    },
+    {
+      "id": "saucelabs-endpoint-type",
+      "description": "Sauce Labs Credentials",
+      "type": "ms.vss-endpoint.service-endpoint-type",
+      "targets": [ "ms.vss-endpoint.endpoint-types" ],
+      "properties": {
+        "name": "saucelabs",
+        "displayName": "Sauce Labs Credentials",
+        "url": "https://saucelabs.com/rest/v1/",
+        "inputDescriptors": [],
+        "authenticationSchemes": [
+          {
+            "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
+            "inputDescriptors": [
+              {
+                "id": "username",
+                "name": "Username",
+                "description": "Username",
+                "inputMode": "textbox",
+                "isConfidential": false,
+                "validation": { "isRequired": false, "dataType": "string" }
+              },
+              {
+                "id": "password",
+                "name": "API Token",
+                "description": "API Token Found on your saucelabs account page",
+                "inputMode": "textbox",
+                "isConfidential": true,
+                "validation": { "isRequired": true, "dataType": "string" }
+              }
+            ]
+          }
+        ]
       }
-    },
-    "links": {
-      "home": { "uri": "https://saucelabs.com" },
-      "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
-      "learn": { "uri": "https://docs.saucelabs.com/" },
-      "issues": { "uri": "https://support.saucelabs.com/" },
-      "support": { "uri": "https://support.saucelabs.com" },
-      "license": { "uri": "https://saucelabs.com/tos/" },
-      "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
-    },
-    "screenshots": [
-      { "path": "images/screenshot2.png" },
-      { "path": "images/screenshot1.png" }
-    ],
-    "icons": {
-      "default": "images/saucelabs-icon.png"
-    },
-    "files": [
-      { "path": "images", "addressable": true },
-      { "path": "sod-main" },
-      { "path": "sod-stop-sc" }
-    ],
-    "contributions": [
-        {
-            "id": "sod-main",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [ "ms.vss-distributed-task.tasks" ],
-            "properties": { "name": "sod-main" }
-        },
-        {
-            "id": "sod-stop-sc",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [ "ms.vss-distributed-task.tasks" ],
-            "properties": { "name": "sod-stop-sc" }
-        }
-    ]
+    }
+  ]
 }

@@ -21,8 +21,8 @@
   "inputs": [
     {
       "name": "connectedServiceName",
-      "type": "connectedService:Generic",
-      "label": "SauceLabsConnection",
+      "type": "connectedService:Saucelabs",
+      "label": "Sauce Labs Credentials",
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "SauceLabs Account Details"
