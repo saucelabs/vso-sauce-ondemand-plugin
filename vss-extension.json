@@ -6,10 +6,6 @@
   "publisher": "saucelabs",
   "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
   "categories": [ "Test" ],
-  "branding": {
-    "color": "#00AFAA",
-    "theme": "dark"
-  },
   "content": {
     "details": {
       "path": "overview.md"
