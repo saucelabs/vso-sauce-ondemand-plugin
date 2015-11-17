@@ -27,7 +27,7 @@ Flip through screenshots taken after each page-altering command to diagnose erro
 ![hosted](images/test-details.png)
 
 ### Test securely in the cloud
-All tests are run in our secure data center on brand new VMs that are destroyed after each run, assuring customer data is never exposed to future sessions. Control proxy and access policies while testing staged applications behind a firewall with [Sauce Connect](https://docs.saucelabs.com/reference/sauce-connect/), our secure tunneling technology. 
+All tests are run in our secure data center on brand new VMs that are destroyed after each run, assuring customer data is never exposed to future sessions. Control proxy and access policies while testing staged applications behind a firewall with [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Using+Sauce+Connect+for+Testing+Behind+the+Firewall+or+on+Localhost), our secure tunneling technology. 
 
 ### Take control
 While tests are running, you'll have access to a live remote desktop session. You can manually take control of the VM (to, say, clear a popup that's blocking your test), or "breakpoint" the test to stop your test session and investigate a problem manually.
