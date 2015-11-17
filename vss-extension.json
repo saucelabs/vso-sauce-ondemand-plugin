@@ -14,7 +14,7 @@
   "links": {
     "home": { "uri": "https://saucelabs.com" },
     "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
-    "learn": { "uri": "https://docs.saucelabs.com/" },
+    "learn": { "uri": "https://wiki.saucelabs.com/display/DOCS/viewpage.action?pageId=53019401" },
     "issues": { "uri": "https://support.saucelabs.com/" },
     "support": { "uri": "https://support.saucelabs.com" },
     "license": { "uri": "https://saucelabs.com/tos/" },
