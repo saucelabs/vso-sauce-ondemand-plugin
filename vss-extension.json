@@ -20,10 +20,6 @@
     "license": { "uri": "https://saucelabs.com/tos/" },
     "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
   },
-  "screenshots": [
-    { "path": "images/screenshot2.png" },
-    { "path": "images/screenshot1.png" }
-  ],
   "icons": {
     "default": "images/saucelabs-icon.png"
   },

@@ -1,4 +1,4 @@
-## Sauce  for Visual Sudio Online (Preview) Overview
+## Sauce for Visual Sudio Online (Preview) Overview
 
 The Sauce for Visual Studio Online (VSO) enables Continuous Delivery by speeding up the testing cycle while increasing the quality of mobile and desktop applications.
 
@@ -7,6 +7,9 @@ Sauce Labs provides a platform for running your Selenium and Appium scripts in t
 To get started [signup for a Sauce Labs free trial](https://saucelabs.com/beta/signup?utm_source=vsip).
 
 The Sauce for VSO allows users to easily authenticate on Sauce Labs as a part of the VSO build process. The plugin also allows users to launch Sauce Connect - a tunnel that lets customers securely test pre-production apps. 
+
+![Devices](images/SL-Device-web-graphic-800x450.jpg)
+![Mockup](images/Sauce-DB-800x450.jpg)
 
 ## Features
 
