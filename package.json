@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "eslint": "^1.9.0",
-    "tfx-cli": "^0.1.11"
+    "tfx-cli": "^0.3.0"
   }
 }

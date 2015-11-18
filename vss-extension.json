@@ -29,6 +29,12 @@
     { "path": "sod-main" },
     { "path": "sod-stop-sc" }
   ],
+  "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
+  "targets": [
+      {
+        "id": "Microsoft.VisualStudio.Services"
+      }
+  ],
   "contributions": [
     {
       "id": "sod-main",

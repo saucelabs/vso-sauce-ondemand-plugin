@@ -1,4 +1,4 @@
-## Sauce for Visual Sudio Online (Preview) Overview
+## Sauce for Visual Studio Online (Preview) Overview
 
 The Sauce for Visual Studio Online (VSO) enables Continuous Delivery by speeding up the testing cycle while increasing the quality of mobile and desktop applications.
 
