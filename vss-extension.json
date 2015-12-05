@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "id": "saucelabs-tasks",
   "name": "Sauce for Visual Studio Online",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "publisher": "saucelabs",
   "public": true,
   "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
