@@ -1,6 +1,6 @@
 /* eslint-env jquery */
-import VSS from 'vss-sdk/lib/VSS.SDK.js';
-const Controls = VSS.Controls;
+/* global VSS */
+const Controls = require('VSS/Controls');
 
 class BuildDumpSection extends Controls.BaseControl {
   constructor() {
@@ -22,5 +22,4 @@ class BuildDumpSection extends Controls.BaseControl {
     this._element.append(span);
   }
 }
-
 export default BuildDumpSection;

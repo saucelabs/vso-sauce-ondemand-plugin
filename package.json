@@ -1,6 +1,6 @@
 {
   "name": "vso-sauce-ondemand-plugin",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "SauceLabs integeration with Visual Studio Online",
   "scripts": {
     "package": "vset package -m vss-extension.json -o Packages"
@@ -31,7 +31,7 @@
     "gulp-copy": "0.0.2",
     "gulp-json-transform": "^0.3.0",
     "run-sequence": "^1.1.5",
-    "tfx-cli": "^0.3.7",
+    "tfx-cli": "^0.3.8",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^2.3.0"
   }

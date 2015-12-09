@@ -28,7 +28,8 @@
     { "path": "images", "addressable": true },
     { "path": "sod-main" },
     { "path": "sod-stop-sc" },
-    { "path": "sod-build-info", "addressable": true }
+    { "path": "sod-build-info", "addressable": true },
+    { "path": "lib", "addressable": true }
   ],
   "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
   "targets": [
@@ -92,7 +93,7 @@
               "ms.vss-build-web.build-results-view"
           ],
           "properties": {
-              "name": "Build Info",
+              "name": "Sauce Labs",
               "uri": "sod-build-info/infoTab.html"
           }
       },
@@ -107,6 +108,23 @@
                "name": "Build Dump",
                "uri": "sod-build-info/buildDumpSection.html",
                "order": 10,
+               "height": 500
+          }
+      },
+      {
+          "id": "build-status-section",
+          "type": "ms.vss-build-web.build-results-section",
+          "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
+          "targets": [
+              ".build-info-tab",
+              "ms.vss-build-web.build-results-summary-tab",
+              "ms.vss-test-web.results-summary-tab",
+              "ms.vss-test-web.test-plans-suites-context"
+          ],
+          "properties": {
+               "name": "Sauce Status",
+               "uri": "sod-build-info/statusSection.html",
+               "order": 20,
                "height": 500
           }
       }

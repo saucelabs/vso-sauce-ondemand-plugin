@@ -22,6 +22,9 @@ var fileTasks = {
     'sod-build-info/**/*', 
     '!./sod-build-info/scripts/*.js',
     '!./sod-*/task.json'
+  ],
+  'copy:vss-sdk': [
+    'node_modules/vss-sdk/lib/VSS.SDK.*js'
   ]
 };
 gulp.task('clean', function() {
@@ -43,9 +46,14 @@ gulp.task('vss-extension', function() {
     .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('copy', function() {
+gulp.task('copy', ['copy:vss-sdk'], function() {
   return gulp.src(fileTasks.copy)
     .pipe(copy('./dist'));
+});
+
+gulp.task('copy:vss-sdk', function() {
+  gulp.src(fileTasks['copy:vss-sdk'])
+    .pipe(gulp.dest('./dist/lib'));
 });
 
 var fix_task_version = function(data) {
@@ -63,21 +71,29 @@ gulp.task('sod-main-task', ['copy'], function() {
 });
 
 gulp.task('sod-stop-sc', ['copy'], function() {
-  return gulp.src('./sod-main/task.json')
+  return gulp.src('./sod-stop-sc/task.json')
     .pipe(jsonTransform(fix_task_version))
-    .pipe(gulp.dest('./dist/sod-main/'));
+    .pipe(gulp.dest('./dist/sod-stop-sc/'));
 });
 
 gulp.task('sod-build-info:js', function() {
   return gulp.src(fileTasks['sod-build-info:js'])
     .pipe(named())
     .pipe(webpack({
+      devtool: '#inline-source-map',
       output: {
         libraryTarget: 'amd'
       },
       resolveLoader: {
         root: path.join(__dirname, 'node_modules')
       },
+      externals: [
+        'VSS/Controls', 'VSS/Service', 
+        'TFS/Build/Contracts', 'TFS/Build/ExtensionContracts'
+      ],
+      /*externals: {
+        "vss-sdk/lib/VSS.SDK.js": "VSS"
+      },*/
       module: {
         loaders: [
           { 
@@ -96,7 +112,7 @@ gulp.task('sod-build-info:js', function() {
 });
 
 gulp.task('package', function(cb) {
-  //runSequence('clean', 'default', function() {
+  runSequence('clean', 'default', function() {
     var common = require('tfx-cli/_build/app/lib/common');
     var command = tfx_extension_create.getCommand([
       '--output-path', path.join(__dirname, 'Packages'),
@@ -110,7 +126,7 @@ gulp.task('package', function(cb) {
       console.error('Unable to create package because ', reason);
       cb(reason);
     });
-  //});
+  });
 });
 
 gulp.task('watch', function() {
