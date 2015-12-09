@@ -1,15 +1,7 @@
 ﻿<!DOCTYPE html>
 <head>
-    <script src="/lib/VSS.SDK.js"></script>
-    <script type="text/javascript">
-    VSS.init({ usePlatformScripts: true, moduleLoaderConfig: { paths: { "scripts": "out/scripts" } } });
-    VSS.ready(function() {
-        require(["scripts/dump"], function () { });
-    });      
-    </script>
-    <style>
-   
-    </style>
+    <title>Sauce Labs Build Dump</title>
+    <script src="scripts/dump.js" type="text/javascript"></script>
 </head>
 
 <body>
