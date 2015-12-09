@@ -1,13 +1,8 @@
 ﻿<!DOCTYPE html>
 <head>
-    <script src="/lib/VSS.SDK.js"></script>
-    <script type="text/javascript">
-    VSS.init({ usePlatformScripts: true, moduleLoaderConfig: { paths: { "scripts": "out/scripts" } } });
-    VSS.ready(function() {
-         require(["scripts/tab"], function () { });
-    });      
-    </script>
-    <style>
+    <title>Sauce Labs Info</title>
+    <script type="text/javascript" src="scripts/tab.js"></script>
+    <style type="text/css">
     .build-info {
         padding: 10px;
     }     

@@ -1,9 +1,10 @@
 /* eslint-env jquery */
-import VSS from 'vss-sdk';
+import VSS from 'vss-sdk/lib/VSS.SDK.js';
 const Controls = VSS.Controls;
 
 class InfoTab extends Controls.BaseControl {
   constructor() {
+    super();
   }
   initialize() {
     super.initialize();

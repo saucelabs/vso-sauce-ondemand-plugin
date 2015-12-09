@@ -28,8 +28,7 @@
     { "path": "images", "addressable": true },
     { "path": "sod-main" },
     { "path": "sod-stop-sc" },
-    { "path": "sod-build-info", "addressable": true },
-    { "path": "node_modules/vss-sdk/lib", "addressable": true }
+    { "path": "sod-build-info", "addressable": true }
   ],
   "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
   "targets": [
