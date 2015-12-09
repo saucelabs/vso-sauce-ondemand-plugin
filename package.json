@@ -15,11 +15,18 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "minimatch": "^3.0.0",
-    "vset": "^0.4.23"
+    "vss-sdk": "^0.91.3"
   },
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
+    "babel-plugin-transform-es2015-modules-amd": "^6.3.13",
+    "babel-preset-stage-0": "^6.3.13",
+    "del": "^2.2.0",
     "eslint": "^1.9.0",
+    "gulp": "^3.9.0",
+    "gulp-copy": "0.0.2",
+    "gulp-json-transform": "^0.3.0",
+    "run-sequence": "^1.1.5",
     "tfx-cli": "^0.3.0"
   }
 }
