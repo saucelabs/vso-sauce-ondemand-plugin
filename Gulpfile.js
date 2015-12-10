@@ -17,9 +17,9 @@ var fileTasks = {
   'copy': [
     'images/**/*',
     'overview.md',
-    'sod-main/**/*', 
-    'sod-stop-sc/**/*', 
-    'sod-build-info/**/*', 
+    'sod-main/**/*',
+    'sod-stop-sc/**/*',
+    'sod-build-info/**/*',
     '!./sod-build-info/scripts/*.js',
     '!./sod-*/task.json'
   ],
@@ -35,25 +35,25 @@ gulp.task('clean', function() {
 
 gulp.task('vss-extension', function() {
   return gulp.src('./vss-extension.json')
-    .pipe(jsonTransform(function(data) {
-      data.version = pkg.version;
-      if (process.env.NODE_ENV !== 'production') {
-        data.publisher = 'saucelabs-beta';
-        data.public = false;
-      }
-      return data;
-    }))
-    .pipe(gulp.dest('./dist/'));
+  .pipe(jsonTransform(function(data) {
+    data.version = pkg.version;
+    if (process.env.NODE_ENV !== 'production') {
+      data.publisher = 'saucelabs-beta';
+      data.public = false;
+    }
+    return data;
+  }))
+  .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('copy', ['copy:vss-sdk'], function() {
   return gulp.src(fileTasks.copy)
-    .pipe(copy('./dist'));
+  .pipe(copy('./dist'));
 });
 
 gulp.task('copy:vss-sdk', function() {
   gulp.src(fileTasks['copy:vss-sdk'])
-    .pipe(gulp.dest('./dist/lib'));
+  .pipe(gulp.dest('./dist/lib'));
 });
 
 var fix_task_version = function(data) {
@@ -66,49 +66,49 @@ var fix_task_version = function(data) {
 
 gulp.task('sod-main-task', ['copy'], function() {
   return gulp.src('./sod-main/task.json')
-    .pipe(jsonTransform(fix_task_version))
-    .pipe(gulp.dest('./dist/sod-main/'));
+  .pipe(jsonTransform(fix_task_version))
+  .pipe(gulp.dest('./dist/sod-main/'));
 });
 
 gulp.task('sod-stop-sc', ['copy'], function() {
   return gulp.src('./sod-stop-sc/task.json')
-    .pipe(jsonTransform(fix_task_version))
-    .pipe(gulp.dest('./dist/sod-stop-sc/'));
+  .pipe(jsonTransform(fix_task_version))
+  .pipe(gulp.dest('./dist/sod-stop-sc/'));
 });
 
 gulp.task('sod-build-info:js', function() {
   return gulp.src(fileTasks['sod-build-info:js'])
-    .pipe(named())
-    .pipe(webpack({
-      devtool: '#inline-source-map',
-      output: {
-        libraryTarget: 'amd'
-      },
-      resolveLoader: {
-        root: path.join(__dirname, 'node_modules')
-      },
-      externals: [
-        'VSS/Controls', 'VSS/Service', 
-        'TFS/Build/Contracts', 'TFS/Build/ExtensionContracts'
-      ],
-      /*externals: {
-        "vss-sdk/lib/VSS.SDK.js": "VSS"
-      },*/
-      module: {
-        loaders: [
-          { 
-            test: /\.js$/, 
-            exclude: /(node_modules|bower_components)/,
-            loader: 'babel',
-            query: {
-              presets: ['es2015']
-            }
-          },
-          { test: /\.css$/, loader: 'style!css' }
-        ]
-      }
-    }))
-    .pipe(gulp.dest('dist/sod-build-info/scripts'));
+  .pipe(named())
+  .pipe(webpack({
+    devtool: '#inline-source-map',
+    output: {
+      libraryTarget: 'amd'
+    },
+    resolveLoader: {
+      root: path.join(__dirname, 'node_modules')
+    },
+    externals: [
+      'VSS/Controls', 'VSS/Service',
+      'TFS/Build/Contracts', 'TFS/Build/ExtensionContracts'
+    ],
+    /*externals: {
+    "vss-sdk/lib/VSS.SDK.js": "VSS"
+    },*/
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'babel',
+          query: {
+            presets: ['es2015']
+          }
+        },
+        { test: /\.css$/, loader: 'style!css' }
+      ]
+    }
+  }))
+  .pipe(gulp.dest('dist/sod-build-info/scripts'));
 });
 
 gulp.task('package', function(cb) {

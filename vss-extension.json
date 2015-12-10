@@ -1,132 +1,143 @@
 {
-  "manifestVersion": 1,
-  "id": "saucelabs-tasks",
-  "name": "Sauce for Visual Studio Online",
-  "version": "0.2.0",
-  "publisher": "saucelabs-beta",
-  "public": false,
-  "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
-  "categories": [ "Test" ],
-  "content": {
-    "details": {
-      "path": "overview.md"
-    }
-  },
-  "links": {
-    "home": { "uri": "https://saucelabs.com" },
-    "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
-    "learn": { "uri": "https://wiki.saucelabs.com/display/DOCS/viewpage.action?pageId=53019401" },
-    "issues": { "uri": "https://support.saucelabs.com/" },
-    "support": { "uri": "https://support.saucelabs.com" },
-    "license": { "uri": "https://saucelabs.com/tos/" },
-    "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
-  },
-  "icons": {
-    "default": "images/saucelabs-icon.png"
-  },
-  "files": [
-    { "path": "images", "addressable": true },
-    { "path": "sod-main" },
-    { "path": "sod-stop-sc" },
-    { "path": "sod-build-info", "addressable": true },
-    { "path": "lib", "addressable": true }
-  ],
-  "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
-  "targets": [
-      {
-        "id": "Microsoft.VisualStudio.Services"
-      }
-  ],
-  "contributions": [
-    {
-      "id": "sod-main",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [ "ms.vss-distributed-task.tasks" ],
-      "properties": { "name": "sod-main" }
+    "manifestVersion": 1,
+    "id": "saucelabs-tasks",
+    "name": "Sauce for Visual Studio Online",
+    "version": "0.2.0",
+    "publisher": "saucelabs-beta",
+    "public": false,
+    "description": "Automatically reduce test times from hours to minutes using Sauce from within VSO, helping accelerate release cycles and increasing quality.",
+    "categories": [ "Test" ],
+    "content": {
+        "details": {
+            "path": "overview.md"
+        }
     },
-    {
-      "id": "sod-stop-sc",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [ "ms.vss-distributed-task.tasks" ],
-      "properties": { "name": "sod-stop-sc" }
+    "links": {
+        "home": { "uri": "https://saucelabs.com" },
+        "gettingstarted": { "uri": "https://saucelabs.com/beta/signup?utm_source=vsip" },
+        "learn": { "uri": "https://wiki.saucelabs.com/display/DOCS/viewpage.action?pageId=53019401" },
+        "issues": { "uri": "https://support.saucelabs.com/" },
+        "support": { "uri": "https://support.saucelabs.com" },
+        "license": { "uri": "https://saucelabs.com/tos/" },
+        "repository": { "uri": "https://github.com/saucelabs/vso-sauce-ondemand-plugin" }
     },
-    {
-      "id": "saucelabs-endpoint-type",
-      "description": "Sauce Labs Credentials",
-      "type": "ms.vss-endpoint.service-endpoint-type",
-      "targets": [ "ms.vss-endpoint.endpoint-types" ],
-      "properties": {
-        "name": "saucelabs",
-        "displayName": "Sauce Labs Credentials",
-        "url": "https://saucelabs.com/rest/v1/",
-        "inputDescriptors": [],
-        "authenticationSchemes": [
-          {
-            "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
-            "inputDescriptors": [
-              {
-                "id": "username",
-                "name": "Username",
-                "description": "Username",
-                "inputMode": "textbox",
-                "isConfidential": false,
-                "validation": { "isRequired": false, "dataType": "string" }
-              },
-              {
-                "id": "password",
-                "name": "API Token",
-                "description": "API Token Found on your saucelabs account page",
-                "inputMode": "textbox",
-                "isConfidential": true,
-                "validation": { "isRequired": true, "dataType": "string" }
-              }
-            ]
-          }
-        ]
-      }
+    "icons": {
+        "default": "images/saucelabs-icon.png"
     },
-    {
-          "id": "build-info-tab",
-          "type": "ms.vss-build-web.build-results-tab",
-          "description": "A tab contributing to build results view",
-          "targets": [
-              "ms.vss-build-web.build-results-view"
-          ],
-          "properties": {
-              "name": "Sauce Labs",
-              "uri": "sod-build-info/infoTab.html"
-          }
-      },
-      {
-          "id": "build-variables-section",
-          "type": "ms.vss-build-web.build-results-section",
-          "description": "A section contributing to our own new tab",
-          "targets": [
-              ".build-info-tab"
-          ],
-          "properties": {
-               "name": "Build Dump",
-               "uri": "sod-build-info/buildDumpSection.html",
-               "order": 10,
-               "height": 500
-          }
-      },
-      {
-          "id": "build-status-section",
-          "type": "ms.vss-build-web.build-results-section",
-          "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
-          "targets": [
-              ".build-info-tab",
-              "ms.vss-build-web.build-results-summary-tab",
-              "ms.vss-test-web.results-summary-tab",
-              "ms.vss-test-web.test-plans-suites-context"
-          ],
-          "properties": {
-               "name": "Sauce Status",
-               "uri": "sod-build-info/statusSection.html",
-               "order": 20,
-               "height": 500
-          }
-      }
-  ]
+    "files": [
+        { "path": "images", "addressable": true },
+        { "path": "sod-main" },
+        { "path": "sod-stop-sc" },
+        { "path": "sod-build-info", "addressable": true },
+        { "path": "lib", "addressable": true }
+        ],
+        "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
+        "targets": [
+            {
+                "id": "Microsoft.VisualStudio.Services"
+            }
+                ],
+                "contributions": [
+                    {
+                        "id": "sod-main",
+                        "type": "ms.vss-distributed-task.task",
+                        "targets": [ "ms.vss-distributed-task.tasks" ],
+                        "properties": { "name": "sod-main" }
+                    },
+                    {
+                        "id": "sod-stop-sc",
+                        "type": "ms.vss-distributed-task.task",
+                        "targets": [ "ms.vss-distributed-task.tasks" ],
+                        "properties": { "name": "sod-stop-sc" }
+                    },
+                    {
+                        "id": "saucelabs-endpoint-type",
+                        "description": "Sauce Labs Credentials",
+                        "type": "ms.vss-endpoint.service-endpoint-type",
+                        "targets": [ "ms.vss-endpoint.endpoint-types" ],
+                        "properties": {
+                            "name": "saucelabs",
+                            "displayName": "Sauce Labs Credentials",
+                            "url": "https://saucelabs.com/rest/v1/",
+                            "inputDescriptors": [],
+                            "authenticationSchemes": [
+                                {
+                                    "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
+                                    "inputDescriptors": [
+                                        {
+                                            "id": "username",
+                                            "name": "Username",
+                                            "description": "Username",
+                                            "inputMode": "textbox",
+                                            "isConfidential": false,
+                                            "validation": { "isRequired": false, "dataType": "string" }
+                                        },
+                                        {
+                                            "id": "password",
+                                            "name": "API Token",
+                                            "description": "API Token Found on your saucelabs account page",
+                                            "inputMode": "textbox",
+                                            "isConfidential": true,
+                                            "validation": { "isRequired": true, "dataType": "string" }
+                                        }
+                                            ]
+                                }
+                                            ]
+                        }
+                    },
+                    {
+                        "id": "build-info-tab",
+                        "type": "ms.vss-build-web.build-results-tab",
+                        "description": "A tab contributing to build results view",
+                        "targets": [
+                            "ms.vss-build-web.build-results-view"
+                            ],
+                            "properties": {
+                                "name": "Sauce Labs",
+                                "uri": "sod-build-info/infoTab.html"
+                            }
+                    },
+                    {
+                        "id": "build-variables-section",
+                        "type": "ms.vss-build-web.build-results-section",
+                        "description": "A section contributing to our own new tab",
+                        "targets": [
+                            ".build-info-tab"
+                        ],
+                        "properties": {
+                            "name": "Build Dump",
+                            "uri": "sod-build-info/buildDumpSection.html",
+                            "order": 10,
+                            "height": 500
+                        }
+                    },
+                    {
+                        "id": "test-hub",
+                        "type": "ms.vss-web.hub",
+                        "description": "Adds a hub to the Test hub group",
+                        "targets": [ "ms.vss-test-web.test-hub-group" ],
+                        "properties": {
+                            "name": "Sauce Status",
+                            "uri": "sod-build-info/statusSection.html",
+                            "order": 100
+                        }
+                    },
+                    {
+                        "id": "build-status-section",
+                        "type": "ms.vss-build-web.build-results-section",
+                        "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
+                        "targets": [
+                            ".build-info-tab",
+                            "ms.vss-build-web.build-results-summary-tab",
+                            "ms.vss-test-web.results-summary-tab",
+                            "ms.vss-test-web.test-plans-suites-context"
+                            ],
+                            "properties": {
+                                "name": "Sauce Status",
+                                "uri": "sod-build-info/statusSection.html",
+                                "order": 20,
+                                "height": 500
+                            }
+                    }
+                                ]
 }
