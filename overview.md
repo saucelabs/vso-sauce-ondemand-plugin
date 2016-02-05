@@ -4,7 +4,7 @@ Sauce for Visual Studio Team Services (VSTS) enables Continuous Delivery by spee
 
 Sauce Labs provides a platform for running your Selenium and Appium scripts in the cloud. Run tests on over 650 browser/platform combinations from IE6 on Windows XP to Safari 9 on OSX El Capitan to the latest versions of Andriod and iOS. Cloud execution means massive parallelization so you can finish your automated tests in minutes rather than hours. 
 
-To get started [signup for a Sauce Labs free trial](https://saucelabs.com/beta/signup?utm_source=vsip).
+To get started [signup for a Sauce Labs free trial](https://saucelabs.com/signup/trial?utm_source=vsip).
 
 Sauce for VSTS allows users to easily authenticate on Sauce Labs as a part of the VSTS build process. The plugin also allows users to launch Sauce Connect - a tunnel that lets customers securely test pre-production apps. 
 
@@ -13,7 +13,7 @@ Sauce for VSTS allows users to easily authenticate on Sauce Labs as a part of th
 
 ## Getting Started
 
-To start using Sauce for VSTS, [signup for a Sauce Labs free trial](https://saucelabs.com/beta/signup?utm_source=vsip). Then visit our [docs](https://wiki.saucelabs.com/display/DOCS/viewpage.action?pageId=53019401) to learn more. 
+To start using Sauce for VSTS, [signup for a Sauce Labs free trial](https://saucelabs.com/signup/trial?utm_source=vsip). Then visit our [docs](https://wiki.saucelabs.com/display/DOCS/viewpage.action?pageId=53019401) to learn more. 
 
 
 ## Features
