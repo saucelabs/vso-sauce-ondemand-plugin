@@ -1,6 +1,6 @@
 {
   "name": "vso-sauce-ondemand-plugin",
-  "version": "0.2.1",
+  "version": "0.1.3",
   "description": "SauceLabs integeration with Visual Studio Online",
   "scripts": {
     "package": "NODE_ENV=production gulp"
