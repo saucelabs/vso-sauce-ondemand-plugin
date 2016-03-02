@@ -3,7 +3,7 @@
   "version": "0.2.1",
   "description": "SauceLabs integeration with Visual Studio Online",
   "scripts": {
-    "package": "vset package -m vss-extension.json -o Packages"
+    "package": "NODE_ENV=production gulp"
   },
   "repository": {
     "type": "git",

@@ -141,7 +141,7 @@ gulp.task('default', [
   'copy',
   'sod-main-task',
   'sod-stop-sc',
-  'sod-build-info:js'
+  //'sod-build-info:js'
 ], function(){
   // run tasks here
   // set up watch handlers here
