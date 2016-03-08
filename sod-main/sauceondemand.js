@@ -151,7 +151,8 @@ var startSC = function startSC(cb) {
 
 
 main(function() {
-  if ( tl.getInput('sauceConnect') ) {
+  var shouldSauceConnect = JSON.parse(tl.getInput('sauceConnect'));
+  if ( shouldSauceConnect ) {
     startSC();
   }
 });
