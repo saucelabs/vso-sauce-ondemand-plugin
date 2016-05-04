@@ -1,8 +1,37 @@
 var tl = require('vso-task-lib');
 var fs = require('fs');
 var path = require('path');
+var https = require('https');
 var spawn = require('child_process').spawn;
 var EventEmitter = require('events').EventEmitter;
+
+var version = require('./task.json').version;
+version = [version.Major, version.Minor, version.Patch].join('.');
+
+var publishStats = function publishStats(credentials) {
+  console.log('starting publish');
+  var req = https.request({
+    host: 'saucelabs.com',
+    port: 443,
+    path: '/rest/v1/stats/ci',
+    method: 'POST',
+    auth: credentials.username + ':' + credentials.password,
+    headers: {
+      'Content-Type': 'application/json',
+      'User-Agent': 'VSTS/' + version
+    }
+  }, function(res) {
+    console.log('publishStats: statusCode: ', res.statusCode);
+  });
+  req.write(JSON.stringify({
+    platform: 'VSTS',
+    platform_version: version
+  }));
+  req.end();
+  req.on('error', function (e) {
+    console.error('publishStats', e);
+  });
+};
 
 var main = function main(cb) {
   // The endpoint stores the auth details as JSON. Unfortunately the structure of the JSON has changed through time, namely the keys were sometimes upper-case.
@@ -60,6 +89,8 @@ var main = function main(cb) {
   tl.setVariable('SAUCE_ACCESS_KEY', credentials.password);
   tl.setVariable('SELENIUM_HOST', 'ondemand.saucelabs.com');
   tl.setVariable('SELENIUM_PORT', '80');
+
+  publishStats(credentials);
   cb();
 };
 
