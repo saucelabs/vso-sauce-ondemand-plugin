@@ -1,0 +1,38 @@
+{
+  "id": "3d77a0c0-fe9f-419b-8254-4a9c01ef4cd9",
+  "name": "SODPublishResults",
+  "friendlyName": "Publish Sauce Labs Results (Preview)",
+  "description": "SauceLabs Configuration for Web and Device Application Testing",
+  "author": "Sauce Labs",
+  "helpMarkDown": "",
+  "category": "Test",
+  "visibility": [
+    "Build",
+    "Release"
+  ],
+  "demands": [],
+  "version": {
+    "Major": "0",
+    "Minor": "2",
+    "Patch": "0"
+  },
+  "minimumAgentVersion": "1.83.0",
+  "instanceNameFormat": "Publish Test Results $(message)",
+  "inputs": [
+    {
+      "name": "connectedServiceName",
+      "type": "connectedService:Saucelabs",
+      "label": "Sauce Labs Credentials",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "SauceLabs Account Details"
+    }
+ ],
+  "execution": {
+    "Node": {
+      "target": "sauceondemand.js",
+      "argumentFormat": ""
+    }
+  }
+}
+

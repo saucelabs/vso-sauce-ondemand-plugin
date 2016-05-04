@@ -27,9 +27,13 @@
   "files": [
     { "path": "images", "addressable": true },
     { "path": "sod-main" },
-    { "path": "sod-stop-sc" }
+    { "path": "sod-stop-sc" },
+    { "path": "sod-build-info", "addressable": true },
+    { "path": "sod-publish-results" },
+    { "path": "lib", "addressable": true }
+
   ],
-  "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
+  "scopes": [ "vso.build_execute", "vso.test", "vso.test_write", "vso.serviceendpoint_manage" ],
   "targets": [
       {
         "id": "Microsoft.VisualStudio.Services"
@@ -47,6 +51,12 @@
       "type": "ms.vss-distributed-task.task",
       "targets": [ "ms.vss-distributed-task.tasks" ],
       "properties": { "name": "sod-stop-sc" }
+    },
+    {
+      "id": "sod-publish-results",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [ "ms.vss-distributed-task.tasks" ],
+      "properties": { "name": "sod-publish-results" }
     },
     {
       "id": "saucelabs-endpoint-type",
@@ -80,8 +90,57 @@
               }
             ]
           }
+        ],
+        "dataSources": [
+            {
+                "name": "getBuild",
+                "endpointUrl": "https://saucelabs.com/rest/v1/info/status"
+            }
         ]
       }
-    }
+    },
+    {
+          "id": "build-info-tab",
+          "type": "ms.vss-build-web.build-results-tab",
+          "description": "A tab contributing to build results view",
+          "targets": [
+              "ms.vss-build-web.build-results-view"
+          ],
+          "properties": {
+              "name": "Sauce Labs",
+              "uri": "sod-build-info/infoTab.html"
+          }
+      },
+      {
+          "id": "build-variables-section",
+          "type": "ms.vss-build-web.build-results-section",
+          "description": "A section contributing to our own new tab",
+          "targets": [
+              ".build-info-tab"
+          ],
+          "properties": {
+               "name": "Build Dump",
+               "uri": "sod-build-info/buildDumpSection.html",
+               "order": 10,
+               "height": 500
+          }
+      },
+      {
+          "id": "build-status-section",
+          "type": "ms.vss-build-web.build-results-section",
+          "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
+          "targets": [
+              ".build-info-tab",
+              "ms.vss-build-web.build-results-summary-tab",
+              "ms.vss-test-web.results-summary-tab",
+              "ms.vss-test-web.test-plans-suites-context"
+          ],
+          "properties": {
+               "name": "Sauce Status",
+               "uri": "sod-build-info/statusSection.html",
+               "order": 20,
+               "height": 500
+          }
+      }
   ]
 }

@@ -15,7 +15,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "vss-sdk": "^0.91.3"
+    "vss-web-extension-sdk": "^1.95.2"
   },
   "devDependencies": {
     "babel-core": "^6.3.15",
@@ -30,6 +30,7 @@
     "gulp": "^3.9.0",
     "gulp-copy": "0.0.2",
     "gulp-json-transform": "^0.3.0",
+    "gulp-jsonlint": "^1.1.2",
     "run-sequence": "^1.1.5",
     "tfx-cli": "^0.3.8",
     "vinyl-named": "^1.1.0",
