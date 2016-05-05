@@ -90,11 +90,10 @@ var main = function main(cb) {
   tl.setVariable('SELENIUM_HOST', 'ondemand.saucelabs.com');
   tl.setVariable('SELENIUM_PORT', '80');
 
-  publishStats(credentials);
-  cb();
+  cb(credentials);
 };
 
-var startSC = function startSC(cb) {
+var startSC = function startSC(credentials) {
 
   var self_path = __dirname;
   var binaries_path = path.join(self_path, 'binaries');
@@ -134,8 +133,8 @@ var startSC = function startSC(cb) {
   var sc_bin = spawn(
     sc_path_bin,
     [
-      '-u', process.env.SAUCE_USERNAME,
-      '-k', process.env.SAUCE_ACCESS_KEY,
+      '-u', credentials.username,
+      '-k', credentials.password,
       '-d', pid_path
     ],
     {
@@ -181,9 +180,11 @@ var startSC = function startSC(cb) {
 };
 
 
-main(function() {
+main(function(credentials) {
+  publishStats(credentials);
+
   var shouldSauceConnect = JSON.parse(tl.getInput('sauceConnect'));
   if ( shouldSauceConnect ) {
-    startSC();
+    startSC(credentials);
   }
 });
