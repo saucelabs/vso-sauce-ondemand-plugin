@@ -6,7 +6,7 @@ var runSequence = require('run-sequence');
 var webpack = require('webpack-stream');
 var named = require('vinyl-named');
 
-var tfx_extension_create = require('tfx-cli/_build/app/exec/extension/create');
+var tfx_extension_create = require('tfx-cli/_build/exec/extension/create');
 var jsonTransform = require('gulp-json-transform');
 var copy = require('gulp-copy');
 
@@ -113,7 +113,7 @@ gulp.task('sod-build-info:js', function() {
 
 gulp.task('package', function(cb) {
   runSequence('clean', 'default', function() {
-    var common = require('tfx-cli/_build/app/lib/common');
+    var common = require('tfx-cli/_build/lib/common');
     var command = tfx_extension_create.getCommand([
       '--output-path', path.join(__dirname, 'Packages'),
       '--root', path.join(__dirname, 'dist')
