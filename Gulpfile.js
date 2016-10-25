@@ -116,7 +116,8 @@ gulp.task('package', function(cb) {
     var common = require('tfx-cli/_build/lib/common');
     var command = tfx_extension_create.getCommand([
       '--output-path', path.join(__dirname, 'Packages'),
-      '--root', path.join(__dirname, 'dist')
+      '--root', path.join(__dirname, 'dist'),
+      '--manifests', path.join(__dirname, 'dist', 'vss-extension.json')
     ]);
     common.EXEC_PATH = ['extension', 'create'];
     command.exec().then(function() {
