@@ -8,8 +8,8 @@ To get started [signup for a Sauce Labs free trial](https://saucelabs.com/signup
 
 Sauce for VSTS allows users to easily authenticate on Sauce Labs as a part of the VSTS build process. The plugin also allows users to launch Sauce Connect - a tunnel that lets customers securely test pre-production apps. 
 
-![Devices](images/SL-Device-web-graphic-800x450.jpg)
-![Mockup](images/Sauce-DB-800x450.jpg)
+![Devices](images/Sauce-Labs-HP-800x450.jpg)
+![Mockup](images/Sauce-Labs-DB-800x450.jpg)
 
 ## Getting Started
 
@@ -29,7 +29,7 @@ Compatible with tests written in any language and framework. Use any test runner
 #### Pinpoint issues easily
 Flip through screenshots taken after each page-altering command to diagnose errors and verify layout. Or, watch a video recording of the whole test from start to finish.
 
-![hosted](images/test-details.png)
+![hosted](images/Sauce-Labs-TR-800x450.jpg)
 
 #### Test securely in the cloud
 All tests are run in our secure data center on brand new VMs that are destroyed after each run, assuring customer data is never exposed to future sessions. Control proxy and access policies while testing staged applications behind a firewall with [Sauce Connect](https://wiki.saucelabs.com/display/DOCS/Using+Sauce+Connect+for+Testing+Behind+the+Firewall+or+on+Localhost), our secure tunneling technology. 
