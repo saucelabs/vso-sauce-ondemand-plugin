@@ -29,7 +29,6 @@
     { "path": "sod-main" },
     { "path": "sod-stop-sc" },
     { "path": "sod-build-info", "addressable": true },
-    { "path": "sod-publish-results" },
     { "path": "lib", "addressable": true }
 
   ],
@@ -51,12 +50,6 @@
       "type": "ms.vss-distributed-task.task",
       "targets": [ "ms.vss-distributed-task.tasks" ],
       "properties": { "name": "sod-stop-sc" }
-    },
-    {
-      "id": "sod-publish-results",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [ "ms.vss-distributed-task.tasks" ],
-      "properties": { "name": "sod-publish-results" }
     },
     {
       "id": "saucelabs-endpoint-type",

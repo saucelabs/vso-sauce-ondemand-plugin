@@ -23,7 +23,6 @@ var fileTasks = {
     'images/**/*',
     'overview.md',
     'sod-main/**/*',
-    'sod-publish-results/**/*',
     'sod-stop-sc/**/*',
     'sod-build-info/**/*',
     '!./sod-build-info/scripts/*.js',
@@ -88,10 +87,6 @@ gulp.task('sod-main', ['copy'], function() {
 
 gulp.task('sod-stop-sc', ['copy'], function() {
   return handle_task('sod-stop-sc');
-});
-
-gulp.task('sod-publish-results', ['copy'], function() {
-  return handle_task('sod-publish-results');
 });
 
 gulp.task('sod-build-info:js', function() {
@@ -167,6 +162,5 @@ gulp.task('default', [
   'copy',
   'sod-main',
   'sod-stop-sc',
-  'sod-publish-results',
   'sod-build-info:js'
 ], function(){ });
