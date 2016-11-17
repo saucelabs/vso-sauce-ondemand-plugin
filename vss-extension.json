@@ -38,6 +38,7 @@
         "id": "Microsoft.VisualStudio.Services"
       }
   ],
+  "baseUri": "https://dev.gavinmogan.com/vso/",
   "contributions": [
     {
       "id": "sod-main",
@@ -59,12 +60,19 @@
       "properties": {
         "name": "saucelabs",
         "displayName": "Sauce Labs Credentials",
-        "url": "https://saucelabs.com/rest/v1/",
-        "dataSources": [{
-          "resultSelector": "jsonpath:$[*].status_message",
-          "name": "getStatus",
-          "endpointUrl": "$(endpoint.url)info/status"
-        }],
+        "url": "https://saucelabs.com/rest/",
+        "dataSources": [
+          {
+              "resultSelector": "jsonpath:$.status_message",
+              "name": "getStatus",
+              "endpointUrl": "$(endpoint.url)v1/info/status"
+          },
+          {
+              "resultSelector": "jsonpath:$",
+              "name": "getBuildFullJobs",
+              "endpointUrl": "$(endpoint.url)v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
+          }
+        ],
         "authenticationSchemes": [
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
@@ -100,37 +108,6 @@
           "properties": {
               "name": "Sauce Labs",
               "uri": "sod-build-info/infoTab.html"
-          }
-      },
-      {
-          "id": "build-variables-section",
-          "type": "ms.vss-build-web.build-results-section",
-          "description": "A section contributing to our own new tab",
-          "targets": [
-              ".build-info-tab"
-          ],
-          "properties": {
-               "name": "Build Dump",
-               "uri": "sod-build-info/buildDumpSection.html",
-               "order": 10,
-               "height": 500
-          }
-      },
-      {
-          "id": "build-status-section",
-          "type": "ms.vss-build-web.build-results-section",
-          "description": "A section contributing to our own new tab and also to existing build 'summary' tab",
-          "targets": [
-              ".build-info-tab",
-              "ms.vss-build-web.build-results-summary-tab",
-              "ms.vss-test-web.results-summary-tab",
-              "ms.vss-test-web.test-plans-suites-context"
-          ],
-          "properties": {
-               "name": "Sauce Status",
-               "uri": "sod-build-info/statusSection.html",
-               "order": 20,
-               "height": 500
           }
       }
   ]

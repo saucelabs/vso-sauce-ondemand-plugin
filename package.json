@@ -33,6 +33,7 @@
     "gulp-copy": "0.0.2",
     "gulp-json-transform": "^0.4.2",
     "gulp-jsonlint": "^1.1.2",
+    "gulp-plumber": "^1.1.0",
     "run-sequence": "^1.1.5",
     "tfx-cli": "^0.3.8",
     "vinyl-named": "^1.1.0",

@@ -9,11 +9,17 @@ var webpack = require('webpack-stream');
 var named = require('vinyl-named');
 
 var tfx_extension_create = require('tfx-cli/_build/exec/extension/create');
+var tfx_extension_publish = require('tfx-cli/_build/exec/extension/publish');
 var jsonTransform = require('gulp-json-transform');
 var copy = require('gulp-copy');
 var jsonlint = require('gulp-jsonlint');
+var plumber = require('gulp-plumber');
 
 var pkg = require('./package.json');
+if (process.env.NODE_ENV !== 'production') {
+  pkg.version = pkg.version + '.' + Math.floor(new Date().getTime()/1000);
+}
+console.log(pkg.version);
 
 var myCustomJsonLintReporter = function (file) { gutil.log('File ' + file.path + ' is not valid JSON.'); };
 
@@ -92,6 +98,7 @@ gulp.task('sod-stop-sc', ['copy'], function() {
 gulp.task('sod-build-info:js', function() {
   return gulp.src(fileTasks['sod-build-info:js'])
   .pipe(named())
+  .pipe(plumber())
   .pipe(webpack({
     devtool: '#inline-source-map',
     output: {
@@ -109,7 +116,7 @@ gulp.task('sod-build-info:js', function() {
       'TFS/DistributedTask/TaskAgentHttpClient',
       'VSS/Authentication/Services',
       'VSS/Controls',
-      'VSS/Service',
+      'VSS/Service'
     ],
     /*externals: {
     "vss-web-extension-sdk/lib/VSS.SDK.js": "VSS"
@@ -147,6 +154,28 @@ gulp.task('package', function(cb) {
       console.error('Unable to create package because ', reason);
       cb(reason);
     });
+  });
+});
+
+gulp.task('publish', function(cb) {
+  runSequence('clean', 'default', function() {
+    var common = require('tfx-cli/_build/lib/common');
+    var command = tfx_extension_publish.getCommand([
+      '--output-path', path.join(__dirname, 'Packages'),
+      '--root', path.join(__dirname, 'dist'),
+      '--manifests', path.join(__dirname, 'dist', 'vss-extension.json'),
+      '--token', process.env.VSO_TOKEN
+    ]);
+    common.EXEC_PATH = ['extension', 'publish'];
+    command.ensureInitialized()
+      .then(command.exec.bind(command))
+      .then(function() {
+        console.log('then', arguments);
+        cb();
+      }, function(reason) {
+        console.error('Unable to create publish because ', reason);
+        cb(reason);
+      });
   });
 });
 

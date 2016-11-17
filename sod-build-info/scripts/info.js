@@ -1,19 +1,20 @@
 /* eslint-env jquery, browser */
 /* global VSS */
-require('text-encoding');
 const VSS_Auth_Service = require('VSS/Authentication/Services');
 const BuildRestClient = require('TFS/Build/RestClient');
 const TaskAgentRestClient = require('TFS/DistributedTask/TaskAgentRestClient');
-const TaskRestClient = require('TFS/DistributedTask/TaskRestClient');
 
 const webContext = VSS.getWebContext();
 const taskAgentRestClient = TaskAgentRestClient.getClient();
-const taskRestClient = TaskRestClient.getClient();
 const buildClient = BuildRestClient.getClient();
 const sharedConfig = VSS.getConfiguration();
 
 sharedConfig.onBuildChanged(function(build) {
+  /*
 
+  const TaskRestClient = require('TFS/DistributedTask/TaskRestClient');
+  const taskRestClient = TaskRestClient.getClient();
+  require('text-encoding');
   taskRestClient.getPlanAttachments(webContext.project.id, 'build', build.orchestrationPlan.planId, 'SauceLabsBuildResult')
     .then(taskAttachments => {
       var sauceLabsResults = taskAttachments[0]; // should only ever be one
@@ -28,6 +29,7 @@ sharedConfig.onBuildChanged(function(build) {
       ).then(arrayBuffer => new window.TextDecoder('UTF-8').decode(arrayBuffer));
     })
     .then(result => console.log('getAttachment', result));
+  */
 
   buildClient.getDefinition(
     build.definition.id,
@@ -39,42 +41,43 @@ sharedConfig.onBuildChanged(function(build) {
       return 'sauceConnect' in buildInfo.inputs;
     });
     // Find LD service endpoint (which defines which resources we can query)
-    taskAgentRestClient.getServiceEndpointDetails(
+    return taskAgentRestClient.getServiceEndpointDetails(
       webContext.project.id,
       tasks[0].inputs.connectedServiceName
     ).then(function(endpoint) {
-      console.log('endpoints', endpoint);
+      console.log('endpoint', endpoint);
       var body = {
         'dataSourceDetails': {
-          'dataSourceName': 'getBuild'
+          dataSourceName: 'getBuildFullJobs',
+          parameters: {
+            build: 'JavaSauceExample_Build25',
+            username: endpoint.authorization.parameters.username
+          }
         }
       };
       console.log('body', body);
-      taskAgentRestClient.executeServiceEndpointRequest(
+      console.log('taskAgentRestClient.executeServiceEndpointRequest', body);
+      return taskAgentRestClient.executeServiceEndpointRequest(
         body,
         webContext.project.id,
         endpoint.id
       )
-        .then(blah => console.log('executeServiceEndpointRequest', blah))
-        .catch(blah => console.error('err:executeServiceEndpointRequest', blah));
-      return;
-      // Call LD via the service endpoint (auth header is automatically set)
-      taskAgentRestClient.queryServiceEndpoint(
-        {
-          dataSourceName: 'getBuild',
-          endpointId: endpoint.id,
-          parameters: {
-            username: 'halkeye'
-          }
-        },
-        webContext.project.id
-      ).then(
-        function(res) { console.log('queryres', res); },
-        function(error) { console.error('queryerr', error); }
-      );
+        .then(results => results.result[0])
+        .then(str => JSON.parse(str))
+        .then(jobs => {
+          console.log('jobs', jobs);
+          const $ul = $('<ul>');
+          jobs.jobs.forEach(job => {
+            const $li = $('<li>');
+            $li.text(`${job.name} - ${job.os} - ${job.browser} - ${job.name} - ${job.status}`);
+            $ul.append($li);
+          });
+          $('.build-info').empty().append($ul);
+        });
     });
-  });
+  }).catch(blah => console.error('endpoint', blah));
 });
+/*
 
 VSS.getAccessToken().then(function(token){
   // Format the auth header
@@ -88,4 +91,4 @@ VSS.getAppToken().then(token => {
   console.log('User token is', token);
 });
 
-
+*/

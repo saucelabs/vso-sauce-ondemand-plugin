@@ -1,4 +1,4 @@
-var tl = require('vso-task-lib');
+var tl = require('vsts-task-lib');
 var fs = require('fs');
 var path = require('path');
 var https = require('https');
@@ -86,7 +86,7 @@ var main = function main(cb) {
   //var sauceConnect = tl.getInput('sauceConnect');
 
   tl.setVariable('SAUCE_USERNAME', credentials.username);
-  tl.setVariable('SAUCE_ACCESS_KEY', credentials.password);
+  tl.setVariable('SAUCE_ACCESS_KEY', credentials.password), true;
   tl.setVariable('SELENIUM_HOST', 'ondemand.saucelabs.com');
   tl.setVariable('SELENIUM_PORT', '80');
 
