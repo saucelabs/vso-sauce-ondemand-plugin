@@ -55,11 +55,11 @@
       "id": "saucelabs-endpoint-type",
       "description": "Sauce Labs Credentials",
       "type": "ms.vss-endpoint.service-endpoint-type",
-      "url": "https://saucelabs.com/rest/v1/",
       "targets": [ "ms.vss-endpoint.endpoint-types" ],
       "properties": {
         "name": "saucelabs",
         "displayName": "Sauce Labs Credentials",
+        "url": "https://saucelabs.com/rest/v1/",
         "dataSources": [{
           "resultSelector": "jsonpath:$[*].status_message",
           "name": "getStatus",
