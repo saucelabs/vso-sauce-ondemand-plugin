@@ -5,57 +5,7 @@
   <script type="text/javascript">
     VSS.init({ usePlatformScripts: true, moduleLoaderConfig: { paths: { "scripts": "sod-build-info/scripts" } } });
     VSS.ready(function() {
-        require(
-            ["VSS/Authentication/Services", "TFS/Build/RestClient", "TFS/DistributedTask/TaskAgentRestClient"/*, "scripts/tab"*/],
-            function (VSS_Auth_Service, BuildRestClient, TaskRestClient) {
-                var webContext = VSS.getWebContext();
-                var taskClient = TaskRestClient.getClient();
-                var buildClient = BuildRestClient.getClient();
-                var sharedConfig = VSS.getConfiguration();
-
-                sharedConfig.onBuildChanged(function(build) {
-                    buildClient.getDefinition(
-                        build.definition.id,
-                        webContext.project.id
-                    ).then(function(definition) {
-                        // build2.variables object should be able to override the generated build name
-                        var tasks = definition.build.filter(function(buildInfo) {
-                            // is there a better way to identify sod-main?
-                            return "sauceConnect" in buildInfo.inputs;
-                        });
-                        // Find LD service endpoint (which defines which resources we can query)
-                        taskClient.getServiceEndpointDetails(
-                            webContext.project.id,
-                            tasks[0].inputs.connectedServiceName
-                        ).then(function(endpoint) {
-                            console.log('endpoints', endpoint);
-                            // Call LD via the service endpoint (auth header is automatically set)
-                            taskClient.queryServiceEndpoint(
-                                {
-                                    dataSourceName: 'getBuild',
-                                    endpointId: endpoint.id,
-                                    parameters: {
-                                        username: "halkeye"
-                                    }
-                                },
-                                webContext.project.id
-                            ).then(
-                                function(res) { console.log('queryres', res); },
-                                function(error) { console.error('queryerr', error); }
-                            );
-                        });
-                    });
-                });
-
-                VSS.getAccessToken().then(function(token){
-                    // Format the auth header
-                    var authHeader = VSS_Auth_Service.authTokenManager.getAuthorizationHeader(token);
-
-                    // Add token as an Authorization header to your request
-                    console.log('authHeader', authHeader);
-                });
-            }
-        );
+        require(["scripts/info"], function () { });
     });
   </script>
   <style type="text/css">

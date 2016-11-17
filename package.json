@@ -1,6 +1,6 @@
 {
   "name": "vso-sauce-ondemand-plugin",
-  "version": "0.1.9",
+  "version": "0.1.12",
   "description": "SauceLabs integeration with Visual Studio Online",
   "scripts": {
     "package": "NODE_ENV=production gulp package"
@@ -15,7 +15,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "vss-web-extension-sdk": "^1.95.2"
+    "text-encoding": "^0.6.1",
+    "vss-web-extension-sdk": "^1.106.0",
+    "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.3.15",

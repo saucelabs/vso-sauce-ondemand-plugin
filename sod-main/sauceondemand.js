@@ -182,6 +182,12 @@ var startSC = function startSC(credentials) {
 
 main(function(credentials) {
   publishStats(credentials);
+  require('fs').writeFileSync('gavin.txt', 'hey there');
+  tl.command('task.addattachment', {
+    type: 'SauceLabsBuildResult',
+    name: 'buildresults'
+  }, require('path').resolve('gavin.txt'));
+
 
   var shouldSauceConnect = JSON.parse(tl.getInput('sauceConnect'));
   if ( shouldSauceConnect ) {

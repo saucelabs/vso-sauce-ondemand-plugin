@@ -106,8 +106,15 @@ gulp.task('sod-build-info:js', function() {
       root: path.join(__dirname, 'node_modules')
     },
     externals: [
-      'VSS/Controls', 'VSS/Service',
-      'TFS/Build/Contracts', 'TFS/Build/ExtensionContracts'
+      'TFS/Build/Contracts',
+      'TFS/Build/ExtensionContracts',
+      'TFS/Build/RestClient',
+      'TFS/DistributedTask/TaskAgentRestClient',
+      'TFS/DistributedTask/TaskRestClient',
+      'TFS/DistributedTask/TaskAgentHttpClient',
+      'VSS/Authentication/Services',
+      'VSS/Controls',
+      'VSS/Service',
     ],
     /*externals: {
     "vss-web-extension-sdk/lib/VSS.SDK.js": "VSS"

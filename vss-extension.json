@@ -62,12 +62,16 @@
       "id": "saucelabs-endpoint-type",
       "description": "Sauce Labs Credentials",
       "type": "ms.vss-endpoint.service-endpoint-type",
+      "url": "https://saucelabs.com/rest/v1/",
       "targets": [ "ms.vss-endpoint.endpoint-types" ],
       "properties": {
         "name": "saucelabs",
         "displayName": "Sauce Labs Credentials",
-        "url": "https://saucelabs.com/rest/v1/",
-        "inputDescriptors": [],
+        "dataSources": [{
+          "resultSelector": "jsonpath:$[*].status_message",
+          "name": "getStatus",
+          "endpointUrl": "$(endpoint.url)info/status"
+        }],
         "authenticationSchemes": [
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
@@ -78,7 +82,7 @@
                 "description": "Username",
                 "inputMode": "textbox",
                 "isConfidential": false,
-                "validation": { "isRequired": false, "dataType": "string" }
+                "validation": { "isRequired": true, "dataType": "string" }
               },
               {
                 "id": "password",
@@ -90,12 +94,6 @@
               }
             ]
           }
-        ],
-        "dataSources": [
-            {
-                "name": "getBuild",
-                "endpointUrl": "https://saucelabs.com/rest/v1/info/status"
-            }
         ]
       }
     },
