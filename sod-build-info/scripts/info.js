@@ -1,84 +1,80 @@
-/* eslint-env jquery, browser */
+/* eslint-env jquery, browser, es6 */
 /* global VSS */
-const VSS_Auth_Service = require('VSS/Authentication/Services');
-const BuildRestClient = require('TFS/Build/RestClient');
+require('babel-polyfill');
 const TaskAgentRestClient = require('TFS/DistributedTask/TaskAgentRestClient');
+const TaskRestClient = require('TFS/DistributedTask/TaskRestClient');
+//require('text-encoding');
 
 const webContext = VSS.getWebContext();
 const taskAgentRestClient = TaskAgentRestClient.getClient();
-const buildClient = BuildRestClient.getClient();
+const taskRestClient = TaskRestClient.getClient();
 const sharedConfig = VSS.getConfiguration();
 
-sharedConfig.onBuildChanged(function(build) {
-  /*
-
-  const TaskRestClient = require('TFS/DistributedTask/TaskRestClient');
-  const taskRestClient = TaskRestClient.getClient();
-  require('text-encoding');
-  taskRestClient.getPlanAttachments(webContext.project.id, 'build', build.orchestrationPlan.planId, 'SauceLabsBuildResult')
-    .then(taskAttachments => {
-      var sauceLabsResults = taskAttachments[0]; // should only ever be one
-      return taskRestClient.getAttachmentContent(
-        webContext.project.id,
-        'build',
-        build.orchestrationPlan.planId,
-        sauceLabsResults.timelineId,
-        sauceLabsResults.recordId,
-        sauceLabsResults.type,
-        sauceLabsResults.name
-      ).then(arrayBuffer => new window.TextDecoder('UTF-8').decode(arrayBuffer));
-    })
-    .then(result => console.log('getAttachment', result));
-  */
-
-  buildClient.getDefinition(
-    build.definition.id,
-    webContext.project.id
-  ).then(function(definition) {
-    // build2.variables object should be able to override the generated build name
-    var tasks = definition.build.filter(function(buildInfo) {
-      // is there a better way to identify sod-main?
-      return 'sauceConnect' in buildInfo.inputs;
-    });
-    // Find LD service endpoint (which defines which resources we can query)
-    return taskAgentRestClient.getServiceEndpointDetails(
+sharedConfig.onBuildChanged(async function(build) {
+  try {
+    const taskAttachments = await taskRestClient.getPlanAttachments(
       webContext.project.id,
-      tasks[0].inputs.connectedServiceName
-    ).then(function(endpoint) {
-      console.log('endpoint', endpoint);
-      var body = {
-        'dataSourceDetails': {
-          dataSourceName: 'getBuildFullJobs',
-          parameters: {
-            build: 'JavaSauceExample_Build25',
-            username: endpoint.authorization.parameters.username
-          }
+      'build',
+      build.orchestrationPlan.planId,
+      'SauceLabsBuildResult'
+    );
+    const buildInformation = await taskRestClient.getAttachmentContent(
+      webContext.project.id,
+      'build',
+      build.orchestrationPlan.planId,
+      taskAttachments[0].timelineId,
+      taskAttachments[0].recordId,
+      taskAttachments[0].type,
+      taskAttachments[0].name
+    )
+      .then(arrayBuffer => new window.TextDecoder('UTF-8').decode(arrayBuffer))
+      .then(str => JSON.parse(str));
+
+    const body = {
+      'dataSourceDetails': {
+        dataSourceName: 'getBuildFullJobs',
+        parameters: {
+          build: buildInformation.SAUCE_BUILD_NAME,
+          username: buildInformation.SAUCE_USERNAME
         }
-      };
-      console.log('body', body);
-      console.log('taskAgentRestClient.executeServiceEndpointRequest', body);
-      return taskAgentRestClient.executeServiceEndpointRequest(
-        body,
-        webContext.project.id,
-        endpoint.id
-      )
-        .then(results => results.result[0])
-        .then(str => JSON.parse(str))
-        .then(jobs => {
-          console.log('jobs', jobs);
-          const $ul = $('<ul>');
-          jobs.jobs.forEach(job => {
-            const $li = $('<li>');
-            $li.text(`${job.name} - ${job.os} - ${job.browser} - ${job.name} - ${job.status}`);
-            $ul.append($li);
-          });
-          $('.build-info').empty().append($ul);
-        });
+      }
+    };
+    console.log('taskAgentRestClient.executeServiceEndpointRequest', body);
+    const jobs = await taskAgentRestClient.executeServiceEndpointRequest(
+      body,
+      webContext.project.id,
+      buildInformation.CONNECTED_SERVICE_NAME
+    )
+      .then(results => results.result[0])
+      .then(str => JSON.parse(str));
+
+    console.log('jobs', jobs);
+    const $table = $('<table>');
+    $table.css('min-width', '800px');
+    $table.append('<thead><tr><th align="left">Job Name</th><th align="left">OS/Browser</th><th align="left">Pass/Fail</th><th align="left">Job Links</th></tr></thead>');
+    jobs.jobs.forEach(job => {
+      const $tr = $('<tr>');
+      $tr.append($('<td>').append(
+        $('<a>').attr('href', '#').text(job.name)
+      ));
+      $tr.append($('<td>').text(job.os + ' ' + job.browser));
+      $tr.append($('<td>').text(job.status));
+      $tr.append(
+        $('<td>')
+          .append($('<a>').attr('href', '#').text('Video'))
+          .append(' - ')
+          .append($('<a>').attr('href', '#').text('Logs'))
+      );
+      $table.append($tr);
     });
-  }).catch(blah => console.error('endpoint', blah));
+    $('.build-info').empty().append('<h2>Sauce Labs results</h2>').append($table);
+  } catch (err) {
+    console.error('error', err);
+  }
 });
 /*
 
+const VSS_Auth_Service = require('VSS/Authentication/Services');
 VSS.getAccessToken().then(function(token){
   // Format the auth header
   var authHeader = VSS_Auth_Service.authTokenManager.getAuthorizationHeader(token);

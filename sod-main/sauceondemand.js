@@ -1,3 +1,4 @@
+/* global Promise */
 var tl = require('vsts-task-lib');
 var fs = require('fs');
 var path = require('path');
@@ -89,11 +90,14 @@ var main = function main(cb) {
   tl.setVariable('SAUCE_ACCESS_KEY', credentials.password), true;
   tl.setVariable('SELENIUM_HOST', 'ondemand.saucelabs.com');
   tl.setVariable('SELENIUM_PORT', '80');
-
+  tl.setVariable('SAUCE_BUILD_NAME', [
+    tl.getVariable('BUILD_DEFINITIONNAME'),
+    tl.getVariable('BUILD_BUILDID')
+  ].join('_').replace(/ /g, '_'));
   cb(credentials);
 };
 
-var startSC = function startSC(credentials) {
+var startSC = function startSC(credentials, resolve) {
 
   var self_path = __dirname;
   var binaries_path = path.join(self_path, 'binaries');
@@ -143,13 +147,13 @@ var startSC = function startSC(credentials) {
     }
   );
 
-  tl.setVariable('SAUCE_CONNECT_PID', sc_bin.pid);
-
+  console.log('setting variable');
+  tl.setVariable('SAUCE_CONNECT_PID', 'pid_' + sc_bin.pid);
 
   var lineEmitter = new EventEmitter();
   lineEmitter.on('stdout', function(line) {
     if (/Sauce Connect is up, you may start your tests/.test(line)) {
-      process.exit(0); // SUCCESS
+      return resolve();
     }
     console.log(line.toString());
   });
@@ -175,22 +179,50 @@ var startSC = function startSC(credentials) {
   });
 
   sc_bin.on('close', function(code) {
-    process.exit(code);
+    return process.exit(code);
   });
 };
 
 
 main(function(credentials) {
   publishStats(credentials);
-  require('fs').writeFileSync('gavin.txt', 'hey there');
-  tl.command('task.addattachment', {
-    type: 'SauceLabsBuildResult',
-    name: 'buildresults'
-  }, require('path').resolve('gavin.txt'));
-
 
   var shouldSauceConnect = JSON.parse(tl.getInput('sauceConnect'));
-  if ( shouldSauceConnect ) {
-    startSC(credentials);
-  }
+  new Promise(function(resolve) {
+    if ( shouldSauceConnect ) {
+      startSC(credentials, resolve);
+    } else {
+      resolve(true);
+    }
+  }).then(function(skipSauceConnect) {
+    var data = [
+      'SAUCE_USERNAME',
+      'SELENIUM_PORT',
+      'SELENIUM_HOST',
+      'SAUCE_BUILD_NAME',
+      'SAUCE_CONNECT_PID_PATH',
+      'SAUCE_CONNECT_PID'
+    ].filter(function(key) {
+      if (skipSauceConnect) {
+        /* remove sauce connect variables if skipping sauce connect */
+        return !/^SAUCE_CONNECT_/.test(key);
+      } else {
+        return true;
+      }
+    }).reduce(function (ret, key) {
+      ret[key] = tl.getVariable(key);
+      return ret;
+    }, {});
+    data.CONNECTED_SERVICE_NAME = tl.getInput('connectedServiceName');
+    fs.writeFileSync('saucelabs.json', JSON.stringify(data));
+    tl.command('task.addattachment', { type: 'SauceLabsBuildResult', name: 'buildresults' }, path.resolve('saucelabs.json'));
+    return true;
+  }).then(function() {
+    console.log('all started');
+    process.exit(0); // SUCCESS
+  }).catch(function(err) {
+    console.log('error starting', err);
+    throw err;
+  });
+
 });

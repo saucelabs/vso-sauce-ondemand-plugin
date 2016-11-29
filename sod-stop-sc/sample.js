@@ -1,5 +1,5 @@
-console.log('Getting SC PID: ', process.env.SAUCE_CONNECT_PID );
-var pid = process.env.SAUCE_CONNECT_PID;
+var pid = process.env.SAUCE_CONNECT_PID.replace('pid_', '');
+console.log('Getting SC PID: ', pid );
 if (!pid) {
   console.log('Unable to shut down sauce connect as no pid file was provided (Was it started?)');
   process.exit(0);

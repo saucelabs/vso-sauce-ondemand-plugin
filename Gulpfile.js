@@ -15,6 +15,8 @@ var copy = require('gulp-copy');
 var jsonlint = require('gulp-jsonlint');
 var plumber = require('gulp-plumber');
 
+gulp = require('gulp-help')(gulp);
+
 var pkg = require('./package.json');
 if (process.env.NODE_ENV !== 'production') {
   pkg.version = pkg.version + '.' + Math.floor(new Date().getTime()/1000);
@@ -116,7 +118,9 @@ gulp.task('sod-build-info:js', function() {
       'TFS/DistributedTask/TaskAgentHttpClient',
       'VSS/Authentication/Services',
       'VSS/Controls',
-      'VSS/Service'
+      'VSS/Service',
+      'react',
+      'React'
     ],
     /*externals: {
     "vss-web-extension-sdk/lib/VSS.SDK.js": "VSS"
@@ -128,7 +132,8 @@ gulp.task('sod-build-info:js', function() {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel',
           query: {
-            presets: ['es2015']
+            presets: ['es2015'],
+            plugins: ['transform-async-to-generator']
           }
         },
         { test: /\.css$/, loader: 'style!css' }
@@ -138,7 +143,7 @@ gulp.task('sod-build-info:js', function() {
   .pipe(gulp.dest('dist/sod-build-info/scripts'));
 });
 
-gulp.task('package', function(cb) {
+gulp.task('package', 'Creates a .vsix file with all the code', function(cb) {
   runSequence('clean', 'default', function() {
     var common = require('tfx-cli/_build/lib/common');
     var command = tfx_extension_create.getCommand([
@@ -157,7 +162,7 @@ gulp.task('package', function(cb) {
   });
 });
 
-gulp.task('publish', function(cb) {
+gulp.task('publish', 'Creates and publishes a vsix file', function(cb) {
   runSequence('clean', 'default', function() {
     var common = require('tfx-cli/_build/lib/common');
     var command = tfx_extension_publish.getCommand([
