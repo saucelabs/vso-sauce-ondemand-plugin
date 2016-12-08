@@ -82,10 +82,10 @@ sharedConfig.onBuildChanged(async function(build) {
             e.preventDefault();
             var dialogOptions = {
               title: 'Test Information',
-              width: 800,
-              height: 600,
+              width: 1000,
+              height: 700,
               urlReplacementObject: {
-                auth: encodeURIComponent(`${auth['job-embed']}&height=600&width=745`)
+                auth: encodeURIComponent(`${auth['job-embed']}&height=600&width=945`)
               }
             };
             VSS.getService(VSS.ServiceIds.Dialog).then(function(dialogService) {
