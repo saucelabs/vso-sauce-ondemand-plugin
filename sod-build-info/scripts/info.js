@@ -99,9 +99,9 @@ sharedConfig.onBuildChanged(async function(build) {
       $tr.append($('<td>').text(job.status));
       $tr.append(
         $('<td>')
-          .append($('<a>').attr('href', auth['video']).text('Video'))
+          .append($('<a>').attr('href', auth['video']).attr('download', '').text('Video'))
           .append(' - ')
-          .append($('<a>').attr('href', auth['selenium-server.log']).text('Logs'))
+          .append($('<a>').attr('href', auth['selenium-server.log']).attr('download', '').text('Logs'))
       );
       $table.append($tr);
     });
