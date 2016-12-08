@@ -30,40 +30,78 @@ sharedConfig.onBuildChanged(async function(build) {
       .then(arrayBuffer => new window.TextDecoder('UTF-8').decode(arrayBuffer))
       .then(str => JSON.parse(str));
 
-    const body = {
-      'dataSourceDetails': {
-        dataSourceName: 'getBuildFullJobs',
-        parameters: {
-          build: buildInformation.SAUCE_BUILD_NAME,
-          username: buildInformation.SAUCE_USERNAME
+    const buildFullJobs = await taskAgentRestClient.executeServiceEndpointRequest(
+      {
+        'dataSourceDetails': {
+          dataSourceName: 'getBuildFullJobs',
+          parameters: {
+            build: buildInformation.SAUCE_BUILD_NAME,
+            username: buildInformation.SAUCE_USERNAME
+          }
         }
-      }
-    };
-    console.log('taskAgentRestClient.executeServiceEndpointRequest', body);
-    const jobs = await taskAgentRestClient.executeServiceEndpointRequest(
-      body,
+      },
       webContext.project.id,
       buildInformation.CONNECTED_SERVICE_NAME
     )
-      .then(results => results.result[0])
-      .then(str => JSON.parse(str));
+      .then(result => {
+        if (result.errorMessage) { throw result.errorMessage; }
+        return result.result[0];
+      })
+      .then(str => JSON.parse(str).jobs);
+    const authResults = await taskAgentRestClient.executeServiceEndpointRequest(
+      {
+        'dataSourceDetails': {
+          dataSourceName: 'getAuth',
+          parameters: {
+            query: `jobIds=${buildFullJobs.map(j => j.id)}`,
+            build: buildInformation.SAUCE_BUILD_NAME,
+            username: buildInformation.SAUCE_USERNAME
+          }
+        }
+      },
+      webContext.project.id,
+      buildInformation.CONNECTED_SERVICE_NAME
+    )
+      .then(result => {
+        if (result.errorMessage) { throw result.errorMessage; }
+        return result.result[0];
+      })
+      .then(str => JSON.parse(str).results);
 
-    console.log('jobs', jobs);
     const $table = $('<table>');
     $table.css('min-width', '800px');
     $table.append('<thead><tr><th align="left">Job Name</th><th align="left">OS/Browser</th><th align="left">Pass/Fail</th><th align="left">Job Links</th></tr></thead>');
-    jobs.jobs.forEach(job => {
+    buildFullJobs.forEach(job => {
+      const auth = authResults.pop();
       const $tr = $('<tr>');
       $tr.append($('<td>').append(
-        $('<a>').attr('href', '#').text(job.name)
+        $('<a>')
+          .attr('href', '#')
+          .text(job.name)
+          .click(function(e) {
+            e.preventDefault();
+            var dialogOptions = {
+              title: 'Test Information',
+              width: 800,
+              height: 600,
+              urlReplacementObject: {
+                auth: encodeURIComponent(`${auth['job-embed']}&height=600&width=745`)
+              }
+            };
+            VSS.getService(VSS.ServiceIds.Dialog).then(function(dialogService) {
+              var extensionCtx = VSS.getExtensionContext();
+              var contributionId = extensionCtx.publisherId + '.' + extensionCtx.extensionId + '.embed-dialog';
+              dialogService.openDialog(contributionId, dialogOptions);
+            });
+          })
       ));
       $tr.append($('<td>').text(job.os + ' ' + job.browser));
       $tr.append($('<td>').text(job.status));
       $tr.append(
         $('<td>')
-          .append($('<a>').attr('href', '#').text('Video'))
+          .append($('<a>').attr('href', auth['video']).text('Video'))
           .append(' - ')
-          .append($('<a>').attr('href', '#').text('Logs'))
+          .append($('<a>').attr('href', auth['selenium-server.log']).text('Logs'))
       );
       $table.append($tr);
     });

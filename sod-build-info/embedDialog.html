@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+  <title>Sauce Labs Info</title>
+  <script src="../lib/VSS.SDK.js"></script>
+  <script type="text/javascript">
+    VSS.init({ usePlatformScripts: true, moduleLoaderConfig: { paths: { "scripts": "sod-build-info/scripts" } } });
+    VSS.ready(function() {
+        require(["scripts/dialog"], function () { });
+    });
+  </script>
+</head>
+<body></body>
+</html>

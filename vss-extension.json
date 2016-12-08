@@ -71,6 +71,11 @@
               "resultSelector": "jsonpath:$",
               "name": "getBuildFullJobs",
               "endpointUrl": "$(endpoint.url)v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
+          },
+          {
+              "resultSelector": "jsonpath:$",
+              "name": "getAuth",
+              "endpointUrl": "https://sauce-for-vsts.saucelabs.com/rest/v1/users/halkeye/bulk/auth?{{query}}"
           }
         ],
         "authenticationSchemes": [
@@ -108,6 +113,15 @@
           "properties": {
               "name": "Sauce Labs",
               "uri": "sod-build-info/infoTab.html"
+          }
+      },
+      {
+          "id": "embed-dialog",
+          "type": "ms.vss-web.control",
+          "description": "Embed Dialog",
+          "targets": [],
+          "properties": {
+              "uri": "sod-build-info/embedDialog.html?auth={{auth}}"
           }
       }
   ]
