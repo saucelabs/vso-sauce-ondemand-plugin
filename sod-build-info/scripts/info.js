@@ -72,7 +72,7 @@ sharedConfig.onBuildChanged(async function(build) {
     $table.css('min-width', '800px');
     $table.append('<thead><tr><th align="left">Job Name</th><th align="left">OS/Browser</th><th align="left">Pass/Fail</th><th align="left">Job Links</th></tr></thead>');
     buildFullJobs.forEach(job => {
-      const auth = authResults.pop();
+      const auth = authResults.shift();
       const $tr = $('<tr>');
       $tr.append($('<td>').append(
         $('<a>')
