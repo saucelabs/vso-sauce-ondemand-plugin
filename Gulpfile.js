@@ -23,6 +23,10 @@ if (process.env.NODE_ENV !== 'production') {
 }
 console.log(pkg.version);
 
+
+/* FIXME
+ * add "baseUri": "https://dev.gavinmogan.com/vso/", somewhere
+ */
 var myCustomJsonLintReporter = function (file) { gutil.log('File ' + file.path + ' is not valid JSON.'); };
 
 var fileTasks = {

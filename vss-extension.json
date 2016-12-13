@@ -38,7 +38,6 @@
         "id": "Microsoft.VisualStudio.Services"
       }
   ],
-  "baseUri": "https://dev.gavinmogan.com/vso/",
   "contributions": [
     {
       "id": "sod-main",
@@ -65,12 +64,12 @@
           {
               "resultSelector": "jsonpath:$.status_message",
               "name": "getStatus",
-              "endpointUrl": "$(endpoint.url)v1/info/status"
+              "endpointUrl": "https://saucelabs.com/rest/v1/info/status"
           },
           {
               "resultSelector": "jsonpath:$",
               "name": "getBuildFullJobs",
-              "endpointUrl": "$(endpoint.url)v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
+              "endpointUrl": "https://saucelabs.com/rest/v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
           },
           {
               "resultSelector": "jsonpath:$",
