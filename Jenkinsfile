@@ -3,7 +3,7 @@ node('docker') {
   checkout scm
 
   stage 'Build'
-  withEnv(['HOME=$WORKSPACE']) {
+  withEnv(["HOME=${env.WORKSPACE}"]) {
       docker.image('node:6.6.0').inside {
           sh 'export'
           sh 'mkdir ~/.npm-global'

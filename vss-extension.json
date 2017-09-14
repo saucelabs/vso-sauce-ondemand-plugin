@@ -27,9 +27,12 @@
   "files": [
     { "path": "images", "addressable": true },
     { "path": "sod-main" },
-    { "path": "sod-stop-sc" }
+    { "path": "sod-stop-sc" },
+    { "path": "sod-build-info", "addressable": true },
+    { "path": "lib", "addressable": true }
+
   ],
-  "scopes": [ "vso.build_execute", "vso.serviceendpoint_manage" ],
+  "scopes": [ "vso.build_execute", "vso.test", "vso.test_write", "vso.serviceendpoint_manage" ],
   "targets": [
       {
         "id": "Microsoft.VisualStudio.Services"
@@ -56,8 +59,24 @@
       "properties": {
         "name": "saucelabs",
         "displayName": "Sauce Labs Credentials",
-        "url": "https://saucelabs.com/rest/v1/",
-        "inputDescriptors": [],
+        "url": "https://saucelabs.com/rest/",
+        "dataSources": [
+          {
+              "resultSelector": "jsonpath:$.status_message",
+              "name": "getStatus",
+              "endpointUrl": "https://saucelabs.com/rest/v1/info/status"
+          },
+          {
+              "resultSelector": "jsonpath:$",
+              "name": "getBuildFullJobs",
+              "endpointUrl": "https://saucelabs.com/rest/v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
+          },
+          {
+              "resultSelector": "jsonpath:$",
+              "name": "getAuth",
+              "endpointUrl": "https://sauce-for-vsts.saucelabs.com/rest/v1/users/halkeye/bulk/auth?{{query}}"
+          }
+        ],
         "authenticationSchemes": [
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
@@ -68,7 +87,7 @@
                 "description": "Username",
                 "inputMode": "textbox",
                 "isConfidential": false,
-                "validation": { "isRequired": false, "dataType": "string" }
+                "validation": { "isRequired": true, "dataType": "string" }
               },
               {
                 "id": "password",
@@ -82,6 +101,27 @@
           }
         ]
       }
-    }
+    },
+    {
+          "id": "build-info-tab",
+          "type": "ms.vss-build-web.build-results-tab",
+          "description": "A tab contributing to build results view",
+          "targets": [
+              "ms.vss-build-web.build-results-view"
+          ],
+          "properties": {
+              "name": "Sauce Labs",
+              "uri": "sod-build-info/infoTab.html"
+          }
+      },
+      {
+          "id": "embed-dialog",
+          "type": "ms.vss-web.control",
+          "description": "Embed Dialog",
+          "targets": [],
+          "properties": {
+              "uri": "sod-build-info/embedDialog.html?auth={{auth}}"
+          }
+      }
   ]
 }

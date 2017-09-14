@@ -23,11 +23,6 @@
     "Node": {
       "target": "sample.js",
       "argumentFormat": ""
-    },
-    "PowerShell": {
-      "target": "$(currentDirectory)\\sample.ps1",
-      "argumentFormat": "",
-      "workingDirectory": "$(currentDirectory)"
     }
   }
 }

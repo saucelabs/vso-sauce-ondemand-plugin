@@ -1,0 +1,24 @@
+﻿<!DOCTYPE html>
+<head>
+  <title>Sauce Labs Info</title>
+  <script src="../lib/VSS.SDK.js"></script>
+  <script src="https://unpkg.com/text-encoding@0.6.1/lib/encoding.js"></script>
+  <script type="text/javascript">
+    VSS.init({ usePlatformScripts: true, moduleLoaderConfig: { paths: { "scripts": "sod-build-info/scripts" } } });
+    VSS.ready(function() {
+        require(["scripts/info"], function () { });
+    });
+  </script>
+  <style type="text/css">
+    .build-info {
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="build-info">
+      <H1>LOADING</h1>
+  </div>
+</body>
+</html>

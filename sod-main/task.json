@@ -41,12 +41,6 @@
     "Node": {
       "target": "sauceondemand.js",
       "argumentFormat": ""
-    },
-    "PowerShell": {
-      "target": "$(currentDirectory)\\sauceondemand.ps1",
-      "argumentFormat": "",
-      "workingDirectory": "$(currentDirectory)",
-      "platforms" : ["windows"]
     }
   }
 }
