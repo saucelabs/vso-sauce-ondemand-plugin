@@ -59,6 +59,7 @@ gulp.task('vss-extension', function() {
     data.version = pkg.version;
     if (process.env.NODE_ENV !== 'production') {
       data.publisher = 'saucelabs-beta';
+      data.id = 'saucelabs-tasks-beta'
       data.public = false;
     }
     return data;
