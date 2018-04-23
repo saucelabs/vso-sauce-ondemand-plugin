@@ -110,6 +110,8 @@ var startSC = function startSC(credentials, resolve) {
   // platform = 'darwin', 'freebsd', 'linux', 'sunos' or 'win32'
   var platform = process.platform;
   if (platform === 'darwin') { platform = 'osx'; }
+  // if win32, the 32 from arch is redundant and will mess up the regex
+  if (platform === 'win32') { arch = ''; }
 
   var regex = new RegExp('sc-([0-9.]+)-' + platform + arch + '$');
   console.log('looking for sc archive files');
