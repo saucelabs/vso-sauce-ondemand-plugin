@@ -96,7 +96,7 @@ sharedConfig.onBuildChanged(async function(build) {
           })
       ));
       $tr.append($('<td>').text(job.os + ' ' + job.browser));
-      $tr.append($('<td>').text(job.status));
+      $tr.append($('<td>').text(job.consolidated_status));
       $tr.append(
         $('<td>')
           .append($('<a download>').attr('href', auth['video']).text('Video'))
