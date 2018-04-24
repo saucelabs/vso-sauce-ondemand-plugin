@@ -105,7 +105,10 @@ sharedConfig.onBuildChanged(async function(build) {
       );
       $table.append($tr);
     });
-    $('.build-info').empty().append('<h2>Sauce Labs results</h2>').append($table);
+    const $buildinfo = $('.build-info').empty();
+    $buildinfo.css('height','400px');
+    $buildinfo.css('overflow','auto');
+    $buildinfo.append('<h2>Sauce Labs results</h2>').append($table);
   } catch (err) {
     console.error('error', err);
   }
