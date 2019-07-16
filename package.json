@@ -30,7 +30,7 @@
     "babel-preset-stage-0": "^6.3.13",
     "babelify": "^7.2.0",
     "del": "^2.2.0",
-    "eslint": "^3.10.2",
+    "eslint": "^4.18.2",
     "gulp": "^3.9.0",
     "gulp-copy": "0.0.2",
     "gulp-help": "^1.6.1",
@@ -38,7 +38,7 @@
     "gulp-jsonlint": "^1.1.2",
     "gulp-plumber": "^1.1.0",
     "run-sequence": "^1.1.5",
-    "tfx-cli": "^0.3.8",
+    "tfx-cli": "^0.7.8",
     "vinyl-named": "^1.1.0",
     "webpack-stream": "^3.2.0"
   }
