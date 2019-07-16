@@ -78,17 +78,22 @@ var main = function main(cb) {
     var hostUrl = tl.getInput('endpointUrl') || tl.getEndpointUrl(genericEndpoint, false);
     var password = tl.getInput('endpointAuthToken') || getAuthParameter(genericEndpoint, 'password');
     var user = tl.getInput('endpointUsername') || getAuthParameter(genericEndpoint, 'username');
+    var datacenter = tl.getInput('endpointDatacenter') || getAuthParameter(genericEndpoint, 'datacenter');
 
-    return { url: hostUrl, password: password, username: user };
+    return { url: hostUrl, password: password, username: user, datacenter: datacenter };
   };
 
   var credentials = getEndpointDetails('connectedServiceName');
   //var browsers = tl.getInput('browsers');
   //var sauceConnect = tl.getInput('sauceConnect');
-
   tl.setVariable('SAUCE_USERNAME', credentials.username);
   tl.setVariable('SAUCE_ACCESS_KEY', credentials.password), true;
+  tl.setVariable('SAUCE_REST_ENDPOINT', 'saucelabs.com');
   tl.setVariable('SELENIUM_HOST', 'ondemand.saucelabs.com');
+  if (credentials.datacenter && credentials.datacenter !== 'us-west-1') {
+    tl.setVariable('SAUCE_REST_ENDPOINT', `${credentials.datacenter}.saucelabs.com`);
+    tl.setVariable('SELENIUM_HOST', `ondemand.${credentials.datacenter}.saucelabs.com`);
+  }
   tl.setVariable('SELENIUM_PORT', '80');
   tl.setVariable('SAUCE_BUILD_NAME', [
     tl.getVariable('BUILD_DEFINITIONNAME'),
@@ -199,6 +204,7 @@ main(function(credentials) {
   }).then(function(skipSauceConnect) {
     var data = [
       'SAUCE_USERNAME',
+      'SAUCE_REST_ENDPOINT',
       'SELENIUM_PORT',
       'SELENIUM_HOST',
       'SAUCE_BUILD_NAME',

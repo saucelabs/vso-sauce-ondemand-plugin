@@ -69,7 +69,7 @@
           {
               "resultSelector": "jsonpath:$",
               "name": "getBuildFullJobs",
-              "endpointUrl": "https://saucelabs.com/rest/v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
+              "endpointUrl": "https://{{sauceEndpoint}}/rest/v1/{{username}}/build/{{build}}/jobs?full=1&vsts=1"
           },
           {
               "resultSelector": "jsonpath:$",
@@ -81,6 +81,35 @@
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-basic",
             "inputDescriptors": [
+              {
+                "id": "datacenter",
+                "name": "Data Center",
+                "description": "SauceLabs data center",
+                "inputMode": "combo",
+                "isConfidential": false,
+                "validation": {
+                  "isRequired": true,
+                  "dataType": "string"
+                },
+                "values": {
+                  "inputId": "dataCenterValues",
+                  "possibleValues": [
+                    {
+                      "value": "us-west-1",
+                      "displayValue": "US West 1"
+                    },
+                    {
+                      "value": "eu-central-1",
+                      "displayValue": "EU Central 1"
+                    },
+                    {
+                      "value": "us-east-1",
+                      "displayValue": "US East 1 (headless)"
+                    }
+                  ],
+                  "isLimitedToPossibleValues": true
+                }
+              },
               {
                 "id": "username",
                 "name": "Username",
