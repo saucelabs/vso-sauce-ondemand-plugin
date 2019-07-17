@@ -2,7 +2,8 @@
 
 1) Run sod-main/binaries/download.sh
 
-2) Strip the binaries, otherwise the VS marketplace will complain about the package being too big (it needs to be around 20MB)
+2) Strip the binaries, otherwise the VS marketplace will complain about the package being too big (it needs to be around 20MB).
+   For the linux binaries, run strip then upx --ultra-brute.  For OSX and Windows, just run upx --ultra-brute, this should get the file sizes within range.
 
 # Building the plugin
 

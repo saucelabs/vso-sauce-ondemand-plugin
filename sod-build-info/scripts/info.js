@@ -36,7 +36,8 @@ sharedConfig.onBuildChanged(async function(build) {
           dataSourceName: 'getBuildFullJobs',
           parameters: {
             build: buildInformation.SAUCE_BUILD_NAME,
-            username: buildInformation.SAUCE_USERNAME
+            username: buildInformation.SAUCE_USERNAME,
+            sauceEndpoint: buildInformation.SAUCE_REST_ENDPOINT
           }
         }
       },
@@ -85,7 +86,7 @@ sharedConfig.onBuildChanged(async function(build) {
               width: 1000,
               height: 700,
               urlReplacementObject: {
-                auth: encodeURIComponent(`${auth['job-embed']}&height=600&width=945`)
+                auth: encodeURIComponent(`${auth['job-embed'].replace('https://saucelabs.com',`https://${buildInformation.SAUCE_REST_ENDPOINT}`)}&height=600&width=945`)
               }
             };
             VSS.getService(VSS.ServiceIds.Dialog).then(function(dialogService) {
@@ -99,9 +100,9 @@ sharedConfig.onBuildChanged(async function(build) {
       $tr.append($('<td>').text(job.consolidated_status));
       $tr.append(
         $('<td>')
-          .append($('<a download>').attr('href', auth['video']).text('Video'))
+          .append($('<a download>').attr('href', auth['video'].replace('https://saucelabs.com',`https://assets.${buildInformation.SAUCE_REST_ENDPOINT}`).replace('.flv','.mp4')).text('Video'))
           .append(' - ')
-          .append($('<a download>').attr('href', auth['selenium-server.log']).text('Logs'))
+          .append($('<a download>').attr('href', auth['selenium-server.log'].replace('https://saucelabs.com',`https://assets.${buildInformation.SAUCE_REST_ENDPOINT}`)).text('Logs'))
       );
       $table.append($tr);
     });
