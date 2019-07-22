@@ -34,8 +34,15 @@
       "defaultValue": "",
       "required": false,
       "helpMarkDown": "Sauce Connect"
+    },
+    {
+      "name": "sauceConnectOptions",
+      "type": "string",
+      "label": "Sauce Connect Options",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "Sauce Connect Commandline Options"
     }
-
  ],
   "execution": {
     "Node": {
