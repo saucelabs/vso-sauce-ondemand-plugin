@@ -102,7 +102,7 @@ var main = function main(cb) {
   cb(credentials);
 };
 
-var startSC = function startSC(credentials, resolve) {
+var startSC = function startSC(credentials, resolve, sauceConnectOptions) {
 
   var self_path = __dirname;
   var binaries_path = path.join(self_path, 'binaries');
@@ -147,7 +147,7 @@ var startSC = function startSC(credentials, resolve) {
       '-u', credentials.username,
       '-k', credentials.password,
       '-d', pid_path
-    ],
+    ].concat(sauceConnectOptions.split(' ')),
     {
       detached: true,
       cwd: self_path
@@ -195,9 +195,14 @@ main(function(credentials) {
   publishStats(credentials);
 
   var shouldSauceConnect = JSON.parse(tl.getInput('sauceConnect'));
+  var sauceConnectOptions = tl.getInput('sauceConnectOptions');
+  if (sauceConnectOptions === null) {
+    console.log('sauceConnectOptions was null')
+    sauceConnectOptions = '';
+  }
   new Promise(function(resolve) {
     if ( shouldSauceConnect ) {
-      startSC(credentials, resolve);
+      startSC(credentials, resolve, sauceConnectOptions);
     } else {
       resolve(true);
     }
